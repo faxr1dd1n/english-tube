@@ -1,6 +1,6 @@
-import 'package:en_tube/src/ui/menu/videos/full_screen.dart';
-import 'package:en_tube/src/ui/menu/videos/items/youtube_video_player.dart';
-import 'package:en_tube/src/ui/menu/videos/video_page.dart';
+import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/ui/menu/lessons/videos/items/youtube_video_player.dart';
+import 'package:en_tube/src/ui/menu/lessons/videos/video_page.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -24,56 +24,47 @@ class _VideosScreenState extends State<VideosScreen> {
 
   int? _currentPlayingIndex;
 
-  void _onVideoTapped(int index) {
-    setState(() {
-      _currentPlayingIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Custom header instead of AppBar
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Videos',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                ],
+      backgroundColor: AppColor.geeralColor,
+      appBar: AppBar(
+        foregroundColor: AppColor.white,
+        backgroundColor: AppColor.geeralColor,
+        elevation: 2,
+        shadowColor: Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+        title: const Text('Videos', style: TextStyle(color: AppColor.white)),
+      ),
+      body: Column(
+        children: [
+         SizedBox(height: 16),
+          // Video list
+          Expanded(
+            child: ListView.separated(
+              physics: const ClampingScrollPhysics(),
+              itemCount: videoUrls.length,
+              separatorBuilder: (context, index) =>
+                  const SizedBox(height: 16),
+              itemBuilder: (_, index) {
+                return VideoListItem(
+                  videoUrl: videoUrls[index],
+                  isPlaying: _currentPlayingIndex == index,
+                  onTap: () {
+                   Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => VideoPage(videoUrl: videoUrls[index]),
               ),
+            );
+                  },
+                );
+              },
             ),
-            // Video list
-            Expanded(
-              child: ListView.separated(
-                physics: const ClampingScrollPhysics(),
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                itemCount: videoUrls.length,
-                separatorBuilder: (context, index) =>
-                    const SizedBox(height: 16),
-                itemBuilder: (_, index) {
-                  return VideoListItem(
-                    videoUrl: videoUrls[index],
-                    isPlaying: _currentPlayingIndex == index,
-                    onTap: () {
-                     Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => VideoPage(videoUrl: videoUrls[index]),
-                ),
-              );
-                    },
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+                  SizedBox(height: 16),
+      
+       ],
       ),
     );
   }

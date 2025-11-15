@@ -1,6 +1,7 @@
+import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/ui/menu/home/home_screen.dart';
+import 'package:en_tube/src/ui/menu/lessons/lessons_screen.dart';
 import 'package:en_tube/src/ui/menu/profile/profile_screen.dart';
-import 'package:en_tube/src/ui/menu/videos/videos_screen.dart';
 import 'package:flutter/material.dart';
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    VideosScreen(),
+    LessonsScreen(),
     ProfileScreen(),
   ];
 
@@ -27,14 +28,18 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColor.geeralColor,
       body: IndexedStack(
         index: _selectedIndex,
         children: _screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
+                backgroundColor: AppColor.geeralColor,
+
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: const Color.fromARGB(255, 34, 37, 55),
+        unselectedItemColor: AppColor.white.withOpacity(0.5),
+        selectedItemColor:  AppColor.white,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.video_library), label: 'Videos'),

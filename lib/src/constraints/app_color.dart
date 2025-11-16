@@ -4,7 +4,7 @@ class AppColor {
   AppColor._();
 
   ///colors
-    static const Color geeralColor = Color.fromRGBO(1,58,99,1);
+    static const Color geeralColor = Color.fromRGBO(15,41,107,1);
 
   
   static const Color light = Color(0xFFF4F7F9);

@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
         selectedItemColor:  AppColor.white,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.video_library), label: 'Videos'),
+          BottomNavigationBarItem(icon: Icon(Icons.video_library), label: 'Lessons'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),

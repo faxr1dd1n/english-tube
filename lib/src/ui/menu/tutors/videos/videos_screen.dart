@@ -1,6 +1,6 @@
 import 'package:en_tube/src/constraints/app_color.dart';
-import 'package:en_tube/src/ui/menu/lessons/videos/items/youtube_video_player.dart';
-import 'package:en_tube/src/ui/menu/lessons/videos/video_page.dart';
+import 'package:en_tube/src/ui/menu/tutors/videos/items/youtube_video_player.dart';
+import 'package:en_tube/src/ui/menu/tutors/videos/video_page.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 

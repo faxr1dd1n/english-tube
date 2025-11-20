@@ -1,7 +1,6 @@
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/ui/login/signup_screen.dart';
 import 'package:en_tube/src/ui/menu/main_screen.dart';
-import 'package:en_tube/src/ui/menu/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

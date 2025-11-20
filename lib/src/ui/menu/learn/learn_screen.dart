@@ -1,16 +1,16 @@
 import 'package:en_tube/src/constraints/app_color.dart';
-import 'package:en_tube/src/ui/menu/lessons/items/lesson_widget.dart';
-import 'package:en_tube/src/ui/menu/lessons/videos/videos_screen.dart';
+import 'package:en_tube/src/ui/menu/learn/items/learn_widget.dart';
+import 'package:en_tube/src/ui/menu/tutors/videos/videos_screen.dart';
 import 'package:flutter/material.dart';
 
-class LessonsScreen extends StatefulWidget {
-  const LessonsScreen({super.key});
+class LearnScreen extends StatefulWidget {
+  const LearnScreen({super.key});
 
   @override
-  State<LessonsScreen> createState() => _LessonsScreenState();
+  State<LearnScreen> createState() => _LearnScreenState();
 }
 
-class _LessonsScreenState extends State<LessonsScreen> {
+class _LearnScreenState extends State<LearnScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +32,7 @@ class _LessonsScreenState extends State<LessonsScreen> {
                 MaterialPageRoute(builder: (context) => VideosScreen()),
               );
             },
-            child: LessonWidget(),
+            child: LearnWidget(),
           );
         },
       ),

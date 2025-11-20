@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LessonWidget extends StatefulWidget {
-  const LessonWidget({super.key});
-
+class LearnWidget extends StatefulWidget {
+  const LearnWidget({super.key});
   @override
-  State<LessonWidget> createState() => _LessonWidgetState();
+  State<LearnWidget> createState() => _LearnWidgetState();
 }
 
-class _LessonWidgetState extends State<LessonWidget> {
+class _LearnWidgetState extends State<LearnWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,17 +18,16 @@ class _LessonWidgetState extends State<LessonWidget> {
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
-            blurRadius: 5, 
+            blurRadius: 5,
             offset: const Offset(0, 3),
           ),
         ],
-
       ),
       margin: const EdgeInsets.only(bottom: 16.0),
       padding: const EdgeInsets.all(16.0),
       child: Row(
         children: [
-         ClipRRect(
+          ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
             child: Image.network(
               'https://thumbs.dreamstime.com/b/avatar-teacher-book-his-hands-d-style-adorable-cartoon-310669103.jpg',
@@ -45,13 +43,10 @@ class _LessonWidgetState extends State<LessonWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
-                  'Lesson Title',
-                  maxLines: 1, 
+                  'Reading',
+                  maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
                 Text(
                   'Brief description of the lesson goes here.',

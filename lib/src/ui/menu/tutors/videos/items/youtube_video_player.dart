@@ -24,57 +24,53 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
       initialVideoId: videoId!,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
-        mute: false,
         controlsVisibleAtStart: true,
         enableCaption: true,
-        forceHD: true,
         disableDragSeek: false,
-        isLive: false,
+        forceHD: true,
+        useHybridComposition: true,
       ),
-    )..addListener(_onPlayerStateChange);
+    )..addListener(_fullScreenListener);
   }
 
-  void _onPlayerStateChange() {
+  void _fullScreenListener() {
     if (_controller.value.isFullScreen) {
-      _enterFullScreen();
+      // Fullscreen mode
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
     } else {
-      _exitFullScreen();
+      // Normal mode
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
     }
-  }
-
-  void _enterFullScreen() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-  }
-
-  void _exitFullScreen() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_onPlayerStateChange);
+    _controller.removeListener(_fullScreenListener);
     _controller.dispose();
-    _exitFullScreen();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayer(
-      controller: _controller,
-      showVideoProgressIndicator: true,
-      progressIndicatorColor: Colors.red,
-      progressColors: const ProgressBarColors(
-        playedColor: Colors.red,
-        handleColor: Colors.white,
+    return YoutubePlayerBuilder(
+      player: YoutubePlayer(
+        controller: _controller,
+        showVideoProgressIndicator: true,
       ),
+      builder: (context, player) {
+        // Player faqat o‘zi chiqadi
+        return AspectRatio(
+          aspectRatio: 16 / 9,
+          child: player,
+        );
+      },
     );
   }
 }

@@ -29,12 +29,12 @@ class _LearnWidgetState extends State<LearnWidget> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
-            child: Image.network(
-              'https://thumbs.dreamstime.com/b/avatar-teacher-book-his-hands-d-style-adorable-cartoon-310669103.jpg',
-              width: 80,
+            child: Image.asset(
+              'assets/images/book.png',
+              width: 70,
               height: 80,
-              fit: BoxFit.cover,
-            ),
+              fit: BoxFit.fill,
+            ),      
           ),
           SizedBox(width: 8.0),
           Expanded(

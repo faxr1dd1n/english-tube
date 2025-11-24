@@ -28,7 +28,7 @@ class StoryPageData {
   const StoryPageData({
     required this.text,
     required this.imageUrl,
-    this.addBottomBar = true,
+    this.addBottomBar = false,
   });
 }
 

@@ -2,7 +2,6 @@ import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:flutter/material.dart';
 
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 class ProgressScreen extends StatefulWidget {
   const ProgressScreen({super.key});

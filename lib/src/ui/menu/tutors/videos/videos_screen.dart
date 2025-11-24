@@ -1,5 +1,4 @@
 import 'package:en_tube/src/constraints/app_color.dart';
-import 'package:en_tube/src/ui/menu/tutors/videos/items/youtube_video_player.dart';
 import 'package:en_tube/src/ui/menu/tutors/videos/video_page.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -22,9 +21,6 @@ class _VideosScreenState extends State<VideosScreen> {
     "https://www.youtube.com/watch?v=9bZkp7q19f0",
   ];
 
-  int? _currentPlayingIndex;
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,131 +29,143 @@ class _VideosScreenState extends State<VideosScreen> {
         foregroundColor: AppColor.white,
         backgroundColor: AppColor.geeralColor,
         elevation: 2,
-        shadowColor: Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
+        shadowColor: const Color.fromARGB(
+          255,
+          255,
+          255,
+          255,
+        ).withValues(alpha: 0.2),
         title: const Text('Videos', style: TextStyle(color: AppColor.white)),
       ),
-      body: Column(
-        children: [
-         SizedBox(height: 16),
-          // Video list
-          Expanded(
-            child: ListView.separated(
-              physics: const ClampingScrollPhysics(),
-              itemCount: videoUrls.length,
-              separatorBuilder: (context, index) =>
-                  const SizedBox(height: 16),
-              itemBuilder: (_, index) {
-                return VideoListItem(
-                  videoUrl: videoUrls[index],
-                  isPlaying: _currentPlayingIndex == index,
-                  onTap: () {
-                   Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => VideoPage(videoUrl: videoUrls[index]),
-              ),
-            );
-                  },
-                );
-              },
-            ),
-          ),
-                  SizedBox(height: 16),
-      
-       ],
+      body: ListView.separated(
+        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        physics: const ClampingScrollPhysics(),
+        itemCount: videoUrls.length,
+        separatorBuilder: (context, index) => const SizedBox(height: 16),
+        itemBuilder: (_, index) {
+          return VideoThumbnail(
+            videoUrl: videoUrls[index],
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => VideoPage(videoUrl: videoUrls[index]),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
 }
 
-class VideoListItem extends StatefulWidget {
+class VideoThumbnail extends StatelessWidget {
   final String videoUrl;
-  final bool isPlaying;
   final VoidCallback onTap;
 
-  const VideoListItem({
+  const VideoThumbnail({
     super.key,
     required this.videoUrl,
-    required this.isPlaying,
     required this.onTap,
   });
 
   @override
-  State<VideoListItem> createState() => _VideoListItemState();
-}
-
-class _VideoListItemState extends State<VideoListItem> {
-  String? _videoId;
-
-  @override
-  void initState() {
-    super.initState();
-    _videoId = YoutubePlayer.convertUrlToId(widget.videoUrl);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (_videoId == null) {
+    final videoId = YoutubePlayer.convertUrlToId(videoUrl);
+    if (videoId == null) {
       return const SizedBox.shrink();
     }
 
-    if (!widget.isPlaying) {
-      // Show thumbnail with play button
-      return GestureDetector(
-        onTap: widget.onTap,
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 12),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              // Thumbnail
-              AspectRatio(
-                aspectRatio: 16 / 9,
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(12),
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        'https://img.youtube.com/vi/$_videoId/hqdefault.jpg',
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: AppColor.white,
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(12),
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://img.youtube.com/vi/$videoId/hqdefault.jpg',
+                        ),
+                        fit: BoxFit.cover,
                       ),
-                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-              ),
-              // Play button overlay
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      blurRadius: 8,
-                      spreadRadius: 2,
-                    ),
-                  ],
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.3),
+                        blurRadius: 8,
+                        spreadRadius: 2,
+                      ),
+                    ],
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: const Icon(
+                    Icons.play_arrow,
+                    color: Colors.white,
+                    size: 40,
+                  ),
                 ),
-                padding: const EdgeInsets.all(16),
-                child: const Icon(
-                  Icons.play_arrow,
-                  color: Colors.white,
-                  size: 40,
-                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Text(
+              'English for begineers (Introduction)',
+              style: TextStyle(
+                color: AppColor.blue,
+                fontWeight: FontWeight.w500,
+                fontSize: 18,
               ),
-            ],
-          ),
-        ),
-      );
-    }
+            ),
 
-    // Show actual YouTube player
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 12),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(12),
-        child: YoutubeVideoPlayer(videoUrl: widget.videoUrl),
+            Row(
+              children: [
+                Icon(Icons.star, color: AppColor.yellow),
+                Icon(Icons.star, color: AppColor.yellow),
+                Icon(Icons.star, color: AppColor.yellow),
+                Icon(Icons.star_half, color: AppColor.yellow),
+                Icon(Icons.star_border_outlined, color: AppColor.yellow),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Icon(Icons.thumb_up_alt, color: AppColor.blue),
+                SizedBox(width: 8),
+                Text(
+                  '15K',
+                  style: TextStyle(
+                    color: AppColor.blue,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(width: 8),
+
+                Icon(Icons.thumb_down, color: AppColor.gray400),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

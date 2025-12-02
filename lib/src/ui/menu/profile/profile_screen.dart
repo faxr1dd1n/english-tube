@@ -1,7 +1,9 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/login_screen.dart';
+import 'package:en_tube/src/widgets/app_bar_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -21,42 +23,83 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _loadUserData() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      userName = prefs.getString("user_name") ?? "User";
-      userEmail = prefs.getString("user_email") ?? "No email";
-    });
+    // Reload user to get latest data
+    await authService.value.currentUser?.reload();
+    final user = authService.value.currentUser;
+    if (user != null) {
+      print("Loading user data...");
+      print("Display Name: ${user.displayName}");
+      print("Email: ${user.email}");
+      setState(() {
+        userName = user.displayName ?? "User";
+        userEmail = user.email ?? "No email";
+      });
+    }
   }
 
   Future<void> logout(BuildContext context) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.remove("token");
-    await prefs.remove("user_email");
-    await prefs.remove("user_name");
-    await prefs.remove("user_password");
+    try {
+      await authService.value.signOut();
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const LoginScreen()),
+      if (!mounted) return;
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginScreen()),
+      );
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(e.message ?? 'Aniqlamagan xatolik'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 2,
+          child: Text(
+            "$label:",
+            style: TextStyle(
+              color: AppColor.white.withValues(alpha: 0.7),
+              fontSize: 14,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Text(
+            value,
+            style: const TextStyle(
+              color: AppColor.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
     );
+  }
+
+  String _formatDate(DateTime date) {
+    return "${date.day}/${date.month}/${date.year} ${date.hour}:${date.minute.toString().padLeft(2, '0')}";
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.geeralColor,
-      appBar: AppBar(
-        backgroundColor: AppColor.geeralColor,
-        elevation: 2,
-        shadowColor: Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
-
-        title: const Text("Profile", style: TextStyle(color: AppColor.white)),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout, color: AppColor.white),
-            onPressed: () => logout(context),
-          ),
-        ],
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBarWidget(title: 'Profile'),
       ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -64,31 +107,142 @@ class _ProfileScreenState extends State<ProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 20),
-            CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.blue,
-              backgroundImage: const NetworkImage(
-                "https://thumbs.dreamstime.com/b/d-icon-avatar-student-man-reading-book-school-concept-education-learning-isolated-transparent-png-background-cartoon-352289965.jpg",
+
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.purple, Colors.blue],
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                ),
+                shape: BoxShape.circle,
+              ),
+              child: ClipOval(
+                child: Image.network(
+                  "https://thumbs.dreamstime.com/b/d-icon-avatar-student-man-reading-book-school-concept-education-learning-isolated-transparent-png-background-cartoon-352289965.jpg",
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
+
+            const SizedBox(height: 40),
+
+            // User ma'lumotlari kartasi
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.white.withValues(alpha: 0.2),
+                  width: 1,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "User Information",
+                    style: TextStyle(
+                      color: AppColor.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  // Display Name
+                  _buildInfoRow(
+                    "Display Name",
+                    authService.value.currentUser?.displayName ?? "Unknown",
+                  ),
+                  const SizedBox(height: 15),
+
+                  // Email
+                  _buildInfoRow("Email", authService.value.currentUser?.email ?? "N/A"),
+                  const SizedBox(height: 15),
+
+                  // User ID
+                  _buildInfoRow(
+                    "User ID",
+                    authService.value.currentUser?.uid ?? "N/A",
+                  ),
+                  const SizedBox(height: 15),
+
+                  // Email Verified
+                  _buildInfoRow(
+                    "Email Verified",
+                    authService.value.currentUser?.emailVerified == true
+                        ? "Yes"
+                        : "No",
+                  ),
+                  const SizedBox(height: 15),
+
+                  // Created At
+                  _buildInfoRow(
+                    "Account Created",
+                    authService.value.currentUser?.metadata.creationTime != null
+                        ? _formatDate(
+                            authService
+                                .value
+                                .currentUser!
+                                .metadata
+                                .creationTime!,
+                          )
+                        : "N/A",
+                  ),
+                  const SizedBox(height: 15),
+
+                  // Last Sign In
+                  _buildInfoRow(
+                    "Last Sign In",
+                    authService.value.currentUser?.metadata.lastSignInTime !=
+                            null
+                        ? _formatDate(
+                            authService
+                                .value
+                                .currentUser!
+                                .metadata
+                                .lastSignInTime!,
+                          )
+                        : "N/A",
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 30),
+
+            // Logout button
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    backgroundColor: const Color.fromARGB(191, 254, 17, 0),
+                  ),
+                  onPressed: () => logout(context),
+                  child: const Text(
+                    "Logout",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+
             const SizedBox(height: 20),
-            Text(
-              userName,
-              style: const TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-                color: AppColor.white,
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              userEmail,
-              style: const TextStyle(
-                color: AppColor.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
           ],
         ),
       ),

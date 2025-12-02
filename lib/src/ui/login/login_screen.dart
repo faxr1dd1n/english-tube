@@ -1,8 +1,9 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/signup_screen.dart';
 import 'package:en_tube/src/ui/menu/main_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -23,50 +24,45 @@ class _LoginScreenState extends State<LoginScreen> {
 
     setState(() => isLoading = true);
 
-    await Future.delayed(const Duration(seconds: 1));
-
-    final prefs = await SharedPreferences.getInstance();
-
-    // Saqlangan user ma'lumotlarini olish
-    final savedEmail = prefs.getString("user_email");
-    final savedPassword = prefs.getString("user_password");
-
-    setState(() => isLoading = false);
-
-    // Agar account mavjud bo'lmasa
-    if (savedEmail == null || savedPassword == null) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Account topilmadi! Iltimos, avval ro'yxatdan o'ting."),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-      return;
-    }
-
-    // Email va parolni tekshirish
-    if (email.text != savedEmail || password.text != savedPassword) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Email yoki parol noto'g'ri!"),
-            backgroundColor: Colors.red,
-          ),
-        );
-      }
-      return;
-    }
-
-    // Login muvaffaqiyatli
-    await prefs.setString("token", "sample_token_123");
-
-    if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const MainScreen()),
+    try {
+      await authService.value.signIn(
+        email: email.text,  
+        password: password.text,
       );
+
+      setState(() => isLoading = false);
+
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const MainScreen()),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      setState(() => isLoading = false);
+
+      if (mounted) {
+        String errorMessage = 'Aniqlamagan xatolik';
+
+        if (e.code == 'user-not-found') {
+          errorMessage = 'Foydalanuvchi topilmadi!';
+        } else if (e.code == 'wrong-password') {
+          errorMessage = 'Parol noto\'g\'ri!';
+        } else if (e.code == 'invalid-email') {
+          errorMessage = 'Email noto\'g\'ri formatda!';
+        } else if (e.code == 'user-disabled') {
+          errorMessage = 'Bu akkaunt o\'chirilgan!';
+        } else if (e.message != null) {
+          errorMessage = e.message!;
+        }
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorMessage),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
 

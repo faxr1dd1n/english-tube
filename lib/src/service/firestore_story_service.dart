@@ -1,0 +1,63 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:en_tube/src/model/story_model.dart';
+
+class FirestoreStoryService {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final String _collectionName = 'stories';
+
+  // Stream orqali barcha storylarni olish (real-time)
+  Stream<List<StoryData>> getStoriesStream() {
+    return _firestore
+        .collection(_collectionName)
+        .orderBy('createdAt', descending: false)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) => StoryData.fromFirestore(doc)).toList();
+    });
+  }
+
+  // Barcha storylarni bir marta olish
+  Future<List<StoryData>> getStories() async {
+    final snapshot = await _firestore
+        .collection(_collectionName)
+        .orderBy('createdAt', descending: false)
+        .get();
+
+    return snapshot.docs.map((doc) => StoryData.fromFirestore(doc)).toList();
+  }
+
+  // Bitta story qo'shish
+  Future<void> addStory(StoryData story) async {
+    final data = story.toFirestore();
+    data['createdAt'] = FieldValue.serverTimestamp();
+
+    await _firestore.collection(_collectionName).add(data);
+  }
+
+  // Story yangilash
+  Future<void> updateStory(String storyId, StoryData story) async {
+    await _firestore
+        .collection(_collectionName)
+        .doc(storyId)
+        .update(story.toFirestore());
+  }
+
+  // Story o'chirish
+  Future<void> deleteStory(String storyId) async {
+    await _firestore.collection(_collectionName).doc(storyId).delete();
+  }
+
+  // Default storylarni Firestore'ga yuklash (faqat bir marta)
+  Future<void> uploadDefaultStories(List<StoryData> stories) async {
+    final batch = _firestore.batch();
+
+    for (var story in stories) {
+      final docRef = _firestore.collection(_collectionName).doc();
+      final data = story.toFirestore();
+      data['createdAt'] = FieldValue.serverTimestamp();
+      batch.set(docRef, data);
+    }
+
+    await batch.commit();
+  }
+}

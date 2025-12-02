@@ -1,284 +1,116 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/model/home_wdget_model.dart';
+import 'package:en_tube/src/model/story_model.dart';
+import 'package:en_tube/src/service/firestore_home_widget_service.dart';
+import 'package:en_tube/src/service/firestore_story_service.dart';
 import 'package:en_tube/src/ui/menu/home/items/home_story_widget.dart';
+import 'package:en_tube/src/ui/menu/home/items/home_widgets_grid_vieew.dart';
+import 'package:en_tube/src/widgets/app_bar_widget.dart';
+import 'package:en_tube/src/widgets/lessons_page_view.dart';
+import 'package:en_tube/src/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  static const List<StoryData> defaultStories = [
-    StoryData(
-      id: "1",
-      title: "Travel whereever",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Color.fromARGB(255, 134, 119, 95),
-      timelineColor: Colors.blue,
-      pages: [
-        StoryPageData(
-          text: "Get a loan",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-          addBottomBar: false,
-        ),
-        StoryPageData(
-          text: "Select a place where you want to go",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-          addBottomBar: false,
-        ),
-        StoryPageData(
-          text: "Dream about the place and pay our interest",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-          addBottomBar: false,
-        ),
-      ],
-    ),
-    StoryData(
-      id: "2",
-      title: "Buy a house anywhere",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.orange,
-      timelineColor: Colors.orange,
-      pages: [
-        StoryPageData(
-          text: "You cannot buy a house. Live with it",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-    StoryData(
-      id: "3",
-      title: "Want a new car?",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.red,
-      timelineColor: Colors.red,
-      pages: [
-        StoryPageData(
-          text:
-              "Want to buy a new car? Get our loan for the rest of your life!",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-        StoryPageData(
-          text:
-              "Can't return the loan? Don't worry, we'll take your soul as a collateral ;-)",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-
-    StoryData(
-      id: "3",
-      title: "Want a new car?",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.red,
-      timelineColor: Colors.red,
-      pages: [
-        StoryPageData(
-          text:
-              "Want to buy a new car? Get our loan for the rest of your life!",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-        StoryPageData(
-          text:
-              "Can't return the loan? Don't worry, we'll take your soul as a collateral ;-)",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-
-    StoryData(
-      id: "3",
-      title: "Want a new car?",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.red,
-      timelineColor: Colors.red,
-      pages: [
-        StoryPageData(
-          text:
-              "Want to buy a new car? Get our loan for the rest of your life!",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-        StoryPageData(
-          text:
-              "Can't return the loan? Don't worry, we'll take your soul as a collateral ;-)",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-
-    StoryData(
-      id: "3",
-      title: "Want a new car?",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.red,
-      timelineColor: Colors.red,
-      pages: [
-        StoryPageData(
-          text:
-              "Want to buy a new car? Get our loan for the rest of your life!",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-        StoryPageData(
-          text:
-              "Can't return the loan? Don't worry, we'll take your soul as a collateral ;-)",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-
-    StoryData(
-      id: "3",
-      title: "Want a new car?",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.red,
-      timelineColor: Colors.red,
-      pages: [
-        StoryPageData(
-          text:
-              "Want to buy a new car? Get our loan for the rest of your life!",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-        StoryPageData(
-          text:
-              "Can't return the loan? Don't worry, we'll take your soul as a collateral ;-)",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-
-    StoryData(
-      id: "3",
-      title: "Want a new car?",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.red,
-      timelineColor: Colors.red,
-      pages: [
-        StoryPageData(
-          text:
-              "Want to buy a new car? Get our loan for the rest of your life!",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-        StoryPageData(
-          text:
-              "Can't return the loan? Don't worry, we'll take your soul as a collateral ;-)",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-
-    StoryData(
-      id: "3",
-      title: "Want a new car?",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.red,
-      timelineColor: Colors.red,
-      pages: [
-        StoryPageData(
-          text:
-              "Want to buy a new car? Get our loan for the rest of your life!",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-        StoryPageData(
-          text:
-              "Can't return the loan? Don't worry, we'll take your soul as a collateral ;-)",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-
-    StoryData(
-      id: "3",
-      title: "Want a new car?",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.red,
-      timelineColor: Colors.red,
-      pages: [
-        StoryPageData(
-          text:
-              "Want to buy a new car? Get our loan for the rest of your life!",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-        StoryPageData(
-          text:
-              "Can't return the loan? Don't worry, we'll take your soul as a collateral ;-)",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-
-    StoryData(
-      id: "3",
-      title: "Want a new car?",
-      imageUrl:
-          "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-      borderColor: Colors.red,
-      timelineColor: Colors.red,
-      pages: [
-        StoryPageData(
-          text:
-              "Want to buy a new car? Get our loan for the rest of your life!",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-        StoryPageData(
-          text:
-              "Can't return the loan? Don't worry, we'll take your soul as a collateral ;-)",
-          imageUrl:
-              "https://www.lingualift.com/wp-content/uploads/2023/06/7494959.jpg",
-        ),
-      ],
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final storyService = FirestoreStoryService();
+    final homeWidgetService = FirestoreHomeWidgetService();
+
     return Scaffold(
       backgroundColor: AppColor.geeralColor,
-      appBar: AppBar(
-        backgroundColor: AppColor.geeralColor,
-        elevation: 2,
-        shadowColor: const Color.fromARGB(
-          255,
-          255,
-          255,
-          255,
-        ).withValues(alpha: 0.2),
-        title: const Text('Home', style: TextStyle(color: AppColor.white)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBarWidget(title: 'Home'),
       ),
-      body: Column(
-        children: [
-          const HomeStoryWidget(stories: defaultStories),
-          Center(
-            child: Text('Home Screen', style: TextStyle(color: AppColor.white)),
-          ),
-        ],
+      body: SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            // Firebase'dan story ma'lumotlarini olish
+            StreamBuilder<List<StoryData>>(
+              stream: storyService.getStoriesStream(),
+              builder: (context, snapshot) {
+                // Loading holati
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return SizedBox(
+                    height: 180,
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                }
+
+                // Xatolik holati
+                if (snapshot.hasError) {
+                  return SizedBox(
+                    height: 180,
+                    child: Center(child: Text('Error: ${snapshot.error}')),
+                  );
+                }
+
+                // Ma'lumot yo'q holati - default storylarni ko'rsatish
+                final stories = snapshot.data ?? defaultStories;
+
+                return HomeStoryWidget(stories: stories);
+              },
+            ),
+            SizedBox(height: 10),
+            Container(
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 37, 72, 161),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(height: 40),
+                  StreamBuilder<List<HomeWidgetModel>>(
+                    stream: homeWidgetService.getHomeWidgetsStream(),
+                    builder: (context, snapshot) {
+                      // Loading holati
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return SizedBox(
+                          height: 180,
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+
+                      // Xatolik holati
+                      if (snapshot.hasError) {
+                        return SizedBox(
+                          height: 180,
+                          child: Center(
+                            child: Text('Error: ${snapshot.error}'),
+                          ),
+                        );
+                      }
+
+                      // Ma'lumot yo'q holati - default storylarni ko'rsatish
+                      final homeWidgets = snapshot.data ?? [];
+
+                      return HomeWidgetsGridVieew(widgetModel: homeWidgets);
+                    },
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TitleWidget(),
+                  ),
+                  SizedBox(height: 16),
+                  SizedBox(height: 200, child: LessonsPageView()),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: TitleWidget(),
+                  ),
+                  SizedBox(height: 16),
+                  SizedBox(height: 200, child: LessonsPageView()),
+                  SizedBox(height: 30),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

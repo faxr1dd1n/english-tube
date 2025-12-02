@@ -1,36 +1,7 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/model/story_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_storyboard/flutter_instagram_storyboard.dart';
-
-class StoryData {
-  final String id;
-  final String title;
-  final String imageUrl;
-  final List<StoryPageData> pages;
-  final Color? borderColor;
-  final Color? timelineColor;
-
-  const StoryData({
-    required this.id,
-    required this.title,
-    required this.imageUrl,
-    required this.pages,
-    this.borderColor,
-    this.timelineColor,
-  });
-}
-
-class StoryPageData {
-  final String text;
-  final String imageUrl;
-  final bool addBottomBar;
-
-  const StoryPageData({
-    required this.text,
-    required this.imageUrl,
-    this.addBottomBar = false,
-  });
-}
 
 class HomeStoryWidget extends StatefulWidget {
   final List<StoryData> stories;
@@ -99,8 +70,10 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(pageData.imageUrl),
-            fit: BoxFit.cover,
+            fit: BoxFit.contain, // Formatni saqlab qoladi
+            alignment: Alignment.center,
           ),
+          color: Colors.black, // Rasm atrofida qora fon
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -110,6 +83,8 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
             children: [
               Text(
                 pageData.text,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 30.0,
@@ -133,6 +108,8 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
           const SizedBox(height: 100.0),
           Text(
             text,
+            maxLines: 2,
+                overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: AppColor.white,
               fontWeight: FontWeight.normal,
@@ -147,10 +124,12 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
 
   BoxDecoration _buildButtonDecoration(String imageUrl) {
     return BoxDecoration(
+      color: AppColor.white,
       borderRadius: BorderRadius.circular(_borderRadius - 3),
       image: DecorationImage(
         image: NetworkImage(imageUrl),
-        fit: BoxFit.cover,
+        fit: BoxFit.cover, // List ichida to'liq to'ldiradi
+        alignment: Alignment.center,
       ),
     );
   }
@@ -185,6 +164,7 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
       pageTransform: const StoryPage3DTransform(),
       buttonDatas: widget.stories.map((story) {
         return StoryButtonData(
+          
           storyId: story.id,
           storyController: storyController,
           timelineBackgroundColor: story.timelineColor ?? Colors.blue,

@@ -1,5 +1,6 @@
 import 'package:en_tube/src/constraints/app_color.dart';
-import 'package:en_tube/src/ui/menu/tutors/videos/video_page.dart';
+import 'package:en_tube/src/ui/menu/mentors/videos/video_page.dart';
+import 'package:en_tube/src/widgets/app_search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -37,24 +38,34 @@ class _VideosScreenState extends State<VideosScreen> {
         ).withValues(alpha: 0.2),
         title: const Text('Videos', style: TextStyle(color: AppColor.white)),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-        physics: const ClampingScrollPhysics(),
-        itemCount: videoUrls.length,
-        separatorBuilder: (context, index) => const SizedBox(height: 16),
-        itemBuilder: (_, index) {
-          return VideoThumbnail(
-            videoUrl: videoUrls[index],
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => VideoPage(videoUrl: videoUrls[index]),
-                ),
-              );
-            },
-          );
-        },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 16),
+
+            AppSearchWidget(),
+            ListView.separated(
+              shrinkWrap: true,
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              physics: NeverScrollableScrollPhysics(),
+              itemCount: videoUrls.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+              itemBuilder: (_, index) {
+                return VideoThumbnail(
+                  videoUrl: videoUrls[index],
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => VideoPage(videoUrl: videoUrls[index]),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -81,6 +92,11 @@ class VideoThumbnail extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.purple, Colors.blue],
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+          ),
           borderRadius: BorderRadius.circular(12),
           color: AppColor.white,
         ),
@@ -131,7 +147,7 @@ class VideoThumbnail extends StatelessWidget {
             Text(
               'English for begineers (Introduction)',
               style: TextStyle(
-                color: AppColor.blue,
+                color: AppColor.white,
                 fontWeight: FontWeight.w500,
                 fontSize: 18,
               ),
@@ -149,19 +165,19 @@ class VideoThumbnail extends StatelessWidget {
             SizedBox(height: 8),
             Row(
               children: [
-                Icon(Icons.thumb_up_alt, color: AppColor.blue),
+                Icon(Icons.thumb_up_alt, color: AppColor.white),
                 SizedBox(width: 8),
                 Text(
                   '15K',
                   style: TextStyle(
-                    color: AppColor.blue,
+                    color: AppColor.white,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
                 SizedBox(width: 8),
 
-                Icon(Icons.thumb_down, color: AppColor.gray400),
+                Icon(Icons.thumb_down, color: AppColor.gray300),
               ],
             ),
           ],

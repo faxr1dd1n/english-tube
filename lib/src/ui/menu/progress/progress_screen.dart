@@ -1,7 +1,9 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/ui/menu/progress/items/stat_barchart_widget.dart';
+import 'package:en_tube/src/ui/menu/progress/items/stat_type_widget.dart';
+import 'package:en_tube/src/ui/menu/progress/items/stat_widget.dart';
+import 'package:en_tube/src/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
-
-import 'package:syncfusion_flutter_charts/charts.dart';
 
 class ProgressScreen extends StatefulWidget {
   const ProgressScreen({super.key});
@@ -11,72 +13,41 @@ class ProgressScreen extends StatefulWidget {
 }
 
 class _ProgressScreenState extends State<ProgressScreen> {
-  late List<_ChartData> data;
-  late TooltipBehavior _tooltip;
-
-  @override
-  void initState() {
-    data = [
-      _ChartData('Dush', 12),
-      _ChartData('Sesh', 15),
-      _ChartData('Chor', 30),
-      _ChartData('Pay', 6.4),
-      _ChartData('Juma', 14),
-      _ChartData('Shan', 14),
-      _ChartData('Yak', 14),
-    ];
-    _tooltip = TooltipBehavior(enable: true);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.geeralColor,
-      appBar: AppBar(
-        backgroundColor: AppColor.geeralColor,
-        elevation: 2,
-        shadowColor: Color.fromARGB(255, 255, 255, 255).withOpacity(0.2),
-        title: const Text('Progress', style: TextStyle(color: AppColor.white)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBarWidget(title: 'Progress'),
       ),
       body: SingleChildScrollView(
-        
         physics: BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           //Initialize the spark charts widget
           child: Column(
-            mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Haftalik hisobot',
-                style: TextStyle(
-                  color: AppColor.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 12),
-              SfCartesianChart(
-                primaryXAxis: CategoryAxis(
-                  labelStyle: TextStyle(color: AppColor.white),
-                ),
-                primaryYAxis: NumericAxis(
-                  labelStyle: TextStyle(color: AppColor.white),
-                  minimum: 0,
-                  maximum: 24,
-                  interval: 1,
-                ),
-                tooltipBehavior: _tooltip,
-        
-                series: <CartesianSeries<_ChartData, String>>[
-                  ColumnSeries<_ChartData, String>(
-                    dataSource: data,
-                    xValueMapper: (_ChartData data, _) => data.x,
-                    yValueMapper: (_ChartData data, _) => data.y,
-                    name: 'Soat',
-                    color: Color.fromRGBO(239, 158, 19, 1),
+              StatTypeWidget(),
+              SizedBox(height: 10),
+              StatBarchartWidget(),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: StatWidget(
+                      title: 'Ko\'rilgan dars soati',
+                      content: '12+ soat',
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: StatWidget(
+                      title: 'Ko\'rilgan darslar soni',
+                      content: '2 dars',
+                    ),
                   ),
                 ],
               ),
@@ -86,11 +57,4 @@ class _ProgressScreenState extends State<ProgressScreen> {
       ),
     );
   }
-}
-
-class _ChartData {
-  _ChartData(this.x, this.y);
-
-  final String x;
-  final double y;
 }

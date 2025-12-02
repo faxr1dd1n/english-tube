@@ -1,8 +1,9 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/login_screen.dart';
 import 'package:en_tube/src/ui/menu/main_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -16,11 +17,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   bool isObscured = true;
   bool isLoading = false;
 
-  Future<void> signUp() async {
+  // Future<void> signUp() async {
+  //   if (!_formKey.currentState!.validate()) return;
+
+  //   if (passwordController.text != confirmPasswordController.text) {
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //       const SnackBar(
+  //         content: Text("Parollar bir xil emas!"),
+  //         backgroundColor: Colors.red,
+  //       ),
+  //     );
+  //     return;
+  //   }
+
+  //   setState(() => isLoading = true);
+
+  //   // ❗ API yo'qligi uchun local saqlash
+  //   await Future.delayed(const Duration(seconds: 1));
+
+  //   final prefs = await SharedPreferences.getInstance();
+  //   await prefs.setString("token", "sample_token_123");
+  //   await prefs.setString("user_name", nameController.text);
+  //   await prefs.setString("user_email", emailController.text);
+  //   await prefs.setString("user_password", passwordController.text);
+
+  //   setState(() => isLoading = false);
+
+  //   if (mounted) {
+  //     Navigator.pushReplacement(
+  //       context,
+  //       MaterialPageRoute(builder: (_) => const MainScreen()),
+  //     );
+  //   }
+  // }
+
+  void register() async {
     if (!_formKey.currentState!.validate()) return;
 
     if (passwordController.text != confirmPasswordController.text) {
@@ -35,22 +71,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     setState(() => isLoading = true);
 
-    // ❗ API yo'qligi uchun local saqlash
-    await Future.delayed(const Duration(seconds: 1));
-
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString("token", "sample_token_123");
-    await prefs.setString("user_name", nameController.text);
-    await prefs.setString("user_email", emailController.text);
-    await prefs.setString("user_password", passwordController.text);
-
-    setState(() => isLoading = false);
-
-    if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const MainScreen()),
+    try {
+      await authService.value.createAccount(
+        email: emailController.text,
+        password: passwordController.text,
       );
+
+      // User name'ni Firebase'ga saqlash
+      print("Saving username: ${nameController.text}");
+      await authService.value.updateUsername(userName: nameController.text);
+      print("Username after update: ${authService.value.currentUser?.displayName}");
+
+      setState(() => isLoading = false);
+
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const MainScreen()),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      setState(() => isLoading = false);
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(e.message ?? 'Aniqlamagan xatolik'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
 
@@ -79,10 +129,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(height: 10),
                 const Text(
                   "Sign up to get started",
-                  style: TextStyle(
-                    color: AppColor.white,
-                    fontSize: 16,
-                  ),
+                  style: TextStyle(color: AppColor.white, fontSize: 16),
                 ),
                 const SizedBox(height: 30),
 
@@ -166,7 +213,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   validator: (v) {
                     if (v!.isEmpty) return "Parol kiriting";
-                    if (v.length < 6) return "Parol kamida 6 belgidan iborat bo'lishi kerak";
+                    if (v.length < 6) {
+                      return "Parol kamida 6 belgidan iborat bo'lishi kerak";
+                    }
                     return null;
                   },
                 ),
@@ -223,11 +272,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             backgroundColor: AppColor.white,
                             disabledBackgroundColor: AppColor.white,
                           ),
-                          onPressed: isLoading ? null : signUp,
+                          onPressed: isLoading ? null : register,
                           child: isLoading
                               ? const CircularProgressIndicator(
-                                  valueColor:
-                                      AlwaysStoppedAnimation<Color>(AppColor.geeralColor),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    AppColor.geeralColor,
+                                  ),
                                 )
                               : const Text(
                                   "Sign Up",
@@ -250,16 +300,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     const Text(
                       "Already have an account? ",
-                      style: TextStyle(
-                        color: AppColor.white,
-                        fontSize: 14,
-                      ),
+                      style: TextStyle(color: AppColor.white, fontSize: 14),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(builder: (_) => const LoginScreen()),
+                          MaterialPageRoute(
+                            builder: (_) => const LoginScreen(),
+                          ),
                         );
                       },
                       child: const Text(

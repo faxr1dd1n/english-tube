@@ -1,5 +1,5 @@
 import 'package:en_tube/src/constraints/app_color.dart';
-import 'package:en_tube/src/model/home_wdget_model.dart';
+import 'package:en_tube/src/model/home_widget_model.dart';
 import 'package:en_tube/src/model/story_model.dart';
 import 'package:en_tube/src/service/firestore_home_widget_service.dart';
 import 'package:en_tube/src/service/firestore_story_service.dart';
@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
     final homeWidgetService = FirestoreHomeWidgetService();
 
     return Scaffold(
-      backgroundColor: AppColor.geeralColor,
+      backgroundColor: AppColor.generalColor,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Home'),
@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 10),
             Container(
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 37, 72, 161),
+                color: const Color.fromARGB(255, 36, 61, 142),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
               ),
               child: Column(

@@ -35,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.geeralColor,
+      backgroundColor: AppColor.generalColor,
       body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -54,7 +54,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            backgroundColor: AppColor.geeralColor,
+            backgroundColor: AppColor.generalColor,
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
             unselectedItemColor: AppColor.white.withOpacity(0.5),

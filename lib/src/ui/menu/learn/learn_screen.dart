@@ -15,7 +15,7 @@ class _LearnScreenState extends State<LearnScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.geeralColor,
+      backgroundColor: AppColor.generalColor,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Lessons'),
@@ -28,7 +28,7 @@ class _LearnScreenState extends State<LearnScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => VideosScreen()),
+                MaterialPageRoute(builder: (context) => VideosScreen(mentorId: 0,),),
               );
             },
             child: LearnWidget(),

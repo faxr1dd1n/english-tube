@@ -96,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.geeralColor,
+      backgroundColor: AppColor.generalColor,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Profile'),
@@ -156,60 +156,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   // Display Name
                   _buildInfoRow(
-                    "Display Name",
+                    "Name",
                     authService.value.currentUser?.displayName ?? "Unknown",
                   ),
                   const SizedBox(height: 15),
 
                   // Email
-                  _buildInfoRow("Email", authService.value.currentUser?.email ?? "N/A"),
-                  const SizedBox(height: 15),
-
-                  // User ID
                   _buildInfoRow(
-                    "User ID",
-                    authService.value.currentUser?.uid ?? "N/A",
+                    "Email",
+                    authService.value.currentUser?.email ?? "N/A",
                   ),
                   const SizedBox(height: 15),
-
-                  // Email Verified
-                  _buildInfoRow(
-                    "Email Verified",
-                    authService.value.currentUser?.emailVerified == true
-                        ? "Yes"
-                        : "No",
-                  ),
-                  const SizedBox(height: 15),
-
-                  // Created At
-                  _buildInfoRow(
-                    "Account Created",
-                    authService.value.currentUser?.metadata.creationTime != null
-                        ? _formatDate(
-                            authService
-                                .value
-                                .currentUser!
-                                .metadata
-                                .creationTime!,
-                          )
-                        : "N/A",
-                  ),
-                  const SizedBox(height: 15),
-
-                  // Last Sign In
-                  _buildInfoRow(
-                    "Last Sign In",
-                    authService.value.currentUser?.metadata.lastSignInTime !=
-                            null
-                        ? _formatDate(
-                            authService
-                                .value
-                                .currentUser!
-                                .metadata
-                                .lastSignInTime!,
-                          )
-                        : "N/A",
-                  ),
                 ],
               ),
             ),
@@ -222,20 +179,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: SizedBox(
                 width: double.infinity,
                 height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    backgroundColor: const Color.fromARGB(191, 254, 17, 0),
+                child: GestureDetector(
+                  onTap: () => logout(context),
+                  child: Container(
+                   
+                  decoration: BoxDecoration(
+                  color: Colors.white.withValues(alpha: 0.1),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.2),
+                    width: 1,
                   ),
-                  onPressed: () => logout(context),
-                  child: const Text(
-                    "Logout",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                                  ),
+                    child: Center(
+                      child: const Text(
+                        "Logout",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ),

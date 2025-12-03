@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:en_tube/src/model/home_widget_model.dart';
+import 'package:en_tube/src/model/mentor_model.dart';
 
-class FirestoreHomeWidgetService {
+class FirestoreMentorService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String _collectionName = 'home_widget';
+  final String _collectionName = 'mentors_list';
 
   // Stream orqali barcha home widgetlarni olish (real-time)
-  Stream<List<HomeWidgetModel>> getHomeWidgetsStream() {
+  Stream<List<MentorModel>> getMetorsStream() {
     return _firestore.collection(_collectionName).snapshots().map((snapshot) {
       final widgets = snapshot.docs.map((doc) {
-        final widget = HomeWidgetModel.fromFirestore(doc);
+        final widget = MentorModel.fromFirestore(doc);
 
         return widget;
       }).toList();
@@ -19,11 +19,11 @@ class FirestoreHomeWidgetService {
   }
 
   // Barcha home widgetlarni bir marta olish
-  Future<List<HomeWidgetModel>> getHomeWidgets() async {
+  Future<List<MentorModel>> getMentors() async {
     final snapshot = await _firestore.collection(_collectionName).get();
 
     return snapshot.docs
-        .map((doc) => HomeWidgetModel.fromFirestore(doc))
+        .map((doc) => MentorModel.fromFirestore(doc))
         .toList();
   }
 

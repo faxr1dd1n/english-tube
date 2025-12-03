@@ -40,10 +40,10 @@ class _VideoPageState extends State<VideoPage> {
       player: YoutubePlayer(controller: _controller),
       builder: (context, player) {
         return Scaffold(
-          backgroundColor: AppColor.geeralColor,
+          backgroundColor: AppColor.generalColor,
           appBar: AppBar(
             foregroundColor: AppColor.white,
-            backgroundColor: AppColor.geeralColor,
+            backgroundColor: AppColor.generalColor,
             title: const Text(
               'Video Player',
               style: TextStyle(color: AppColor.white),

@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.geeralColor,
+      backgroundColor: AppColor.generalColor,
 
       body: Padding(
         padding: EdgeInsets.all(20),
@@ -176,12 +176,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ? const CircularProgressIndicator(
 
                                 valueColor:
-                                    AlwaysStoppedAnimation<Color>(AppColor.geeralColor),
+                                    AlwaysStoppedAnimation<Color>(AppColor.generalColor),
                             )
                             : const Text(
                                 "Login",
                                 style: TextStyle(
-                                  color: AppColor.geeralColor,
+                                  color: AppColor.generalColor,
                                   fontSize: 18,
                                 ),
                               ),

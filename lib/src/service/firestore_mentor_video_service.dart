@@ -1,30 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:en_tube/src/model/home_widget_model.dart';
+import 'package:en_tube/src/model/mentor_video_model.dart';
 
-class FirestoreHomeWidgetService {
+class FirestoreMentorVideoService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String _collectionName = 'home_widget';
+  final String _collectionName = 'mentor_videos';
 
   // Stream orqali barcha home widgetlarni olish (real-time)
-  Stream<List<HomeWidgetModel>> getHomeWidgetsStream() {
-    return _firestore.collection(_collectionName).snapshots().map((snapshot) {
-      final widgets = snapshot.docs.map((doc) {
-        final widget = HomeWidgetModel.fromFirestore(doc);
+  Stream<List<MentorVideoModel>> getMetorVideoStream(int mentorId) {
+    return _firestore
+        .collection(_collectionName)
+        .where('mentor_id', isEqualTo: mentorId)
+        .snapshots()
+        .map((snapshot) {
+          final widgets = snapshot.docs.map((doc) {
+            final widget = MentorVideoModel.fromFirestore(doc);
 
-        return widget;
-      }).toList();
+            return widget;
+          }).toList();
 
-      return widgets;
-    });
+          return widgets;
+        });
   }
 
   // Barcha home widgetlarni bir marta olish
-  Future<List<HomeWidgetModel>> getHomeWidgets() async {
+  Future<List<MentorVideoModel>> getMentorVideo() async {
     final snapshot = await _firestore.collection(_collectionName).get();
 
-    return snapshot.docs
-        .map((doc) => HomeWidgetModel.fromFirestore(doc))
-        .toList();
+    return snapshot.docs.map((doc) => MentorVideoModel.fromFirestore(doc)).toList();
   }
 
   // Bitta story qo'shish

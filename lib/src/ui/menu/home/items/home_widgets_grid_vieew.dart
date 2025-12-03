@@ -1,5 +1,5 @@
 import 'package:en_tube/src/constraints/app_color.dart';
-import 'package:en_tube/src/model/home_wdget_model.dart';
+import 'package:en_tube/src/model/home_widget_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeWidgetsGridVieew extends StatelessWidget {

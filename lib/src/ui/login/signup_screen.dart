@@ -107,7 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.geeralColor,
+      backgroundColor: AppColor.generalColor,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -276,13 +276,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: isLoading
                               ? const CircularProgressIndicator(
                                   valueColor: AlwaysStoppedAnimation<Color>(
-                                    AppColor.geeralColor,
+                                    AppColor.generalColor,
                                   ),
                                 )
                               : const Text(
                                   "Sign Up",
                                   style: TextStyle(
-                                    color: AppColor.geeralColor,
+                                    color: AppColor.generalColor,
                                     fontSize: 18,
                                   ),
                                 ),

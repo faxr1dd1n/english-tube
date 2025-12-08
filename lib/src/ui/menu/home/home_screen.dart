@@ -37,7 +37,12 @@ class HomeScreen extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return SizedBox(
                     height: 180,
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColor.white,
+                        strokeWidth: 3,
+                      ),
+                    ),
                   );
                 }
 
@@ -71,7 +76,12 @@ class HomeScreen extends StatelessWidget {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return SizedBox(
                           height: 180,
-                          child: Center(child: CircularProgressIndicator()),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: AppColor.white,
+                              strokeWidth: 3,
+                            ),
+                          ),
                         );
                       }
 

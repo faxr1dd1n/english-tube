@@ -1,66 +1,66 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:en_tube/src/model/mentor_video_model.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:en_tube/src/model/mentor_video_model.dart';
 
-class FirestoreMentorVideoService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final String _collectionName = 'mentor_videos';
+// class FirestoreMentorVideoService {
+//   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+//   final String _collectionName = 'mentor_videos';
 
-  // Stream orqali barcha home widgetlarni olish (real-time)
-  Stream<List<MentorVideoModel>> getMetorVideoStream(int mentorId) {
-    return _firestore
-        .collection(_collectionName)
-        .where('mentor_id', isEqualTo: mentorId)
-        .snapshots()
-        .map((snapshot) {
-          final widgets = snapshot.docs.map((doc) {
-            final widget = MentorVideoModel.fromFirestore(doc);
+//   // Stream orqali barcha home widgetlarni olish (real-time)
+//   Stream<List<MentorVideoModel>> getMetorVideoStream(int mentorId) {
+//     return _firestore
+//         .collection(_collectionName)
+//         .where('mentor_id', isEqualTo: mentorId)
+//         .snapshots()
+//         .map((snapshot) {
+//           final widgets = snapshot.docs.map((doc) {
+//             final widget = MentorVideoModel.fromFirestore(doc);
 
-            return widget;
-          }).toList();
+//             return widget;
+//           }).toList();
 
-          return widgets;
-        });
-  }
+//           return widgets;
+//         });
+//   }
 
-  // Barcha home widgetlarni bir marta olish
-  Future<List<MentorVideoModel>> getMentorVideo() async {
-    final snapshot = await _firestore.collection(_collectionName).get();
+//   // Barcha home widgetlarni bir marta olish
+//   Future<List<MentorVideoModel>> getMentorVideo() async {
+//     final snapshot = await _firestore.collection(_collectionName).get();
 
-    return snapshot.docs.map((doc) => MentorVideoModel.fromFirestore(doc)).toList();
-  }
+//     return snapshot.docs.map((doc) => MentorVideoModel.fromFirestore(doc)).toList();
+//   }
 
-  // Bitta story qo'shish
-  // Future<void> addStory(StoryData story) async {
-  //   final data = story.toFirestore();
-  //   data['createdAt'] = FieldValue.serverTimestamp();
+//   // Bitta story qo'shish
+//   // Future<void> addStory(StoryData story) async {
+//   //   final data = story.toFirestore();
+//   //   data['createdAt'] = FieldValue.serverTimestamp();
 
-  //   await _firestore.collection(_collectionName).add(data);
-  // }
+//   //   await _firestore.collection(_collectionName).add(data);
+//   // }
 
-  // // Story yangilash
-  // Future<void> updateStory(String storyId, StoryData story) async {
-  //   await _firestore
-  //       .collection(_collectionName)
-  //       .doc(storyId)
-  //       .update(story.toFirestore());
-  // }
+//   // // Story yangilash
+//   // Future<void> updateStory(String storyId, StoryData story) async {
+//   //   await _firestore
+//   //       .collection(_collectionName)
+//   //       .doc(storyId)
+//   //       .update(story.toFirestore());
+//   // }
 
-  // // Story o'chirish
-  // Future<void> deleteStory(String storyId) async {
-  //   await _firestore.collection(_collectionName).doc(storyId).delete();
-  // }
+//   // // Story o'chirish
+//   // Future<void> deleteStory(String storyId) async {
+//   //   await _firestore.collection(_collectionName).doc(storyId).delete();
+//   // }
 
-  // // Default storylarni Firestore'ga yuklash (faqat bir marta)
-  // Future<void> uploadDefaultStories(List<StoryData> stories) async {
-  //   final batch = _firestore.batch();
+//   // // Default storylarni Firestore'ga yuklash (faqat bir marta)
+//   // Future<void> uploadDefaultStories(List<StoryData> stories) async {
+//   //   final batch = _firestore.batch();
 
-  //   for (var story in stories) {
-  //     final docRef = _firestore.collection(_collectionName).doc();
-  //     final data = story.toFirestore();
-  //     data['createdAt'] = FieldValue.serverTimestamp();
-  //     batch.set(docRef, data);
-  //   }
+//   //   for (var story in stories) {
+//   //     final docRef = _firestore.collection(_collectionName).doc();
+//   //     final data = story.toFirestore();
+//   //     data['createdAt'] = FieldValue.serverTimestamp();
+//   //     batch.set(docRef, data);
+//   //   }
 
-  //   await batch.commit();
-  // }
-}
+//   //   await batch.commit();
+//   // }
+// }

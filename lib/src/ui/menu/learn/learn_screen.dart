@@ -1,4 +1,5 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/model/mentor_model.dart';
 import 'package:en_tube/src/ui/menu/learn/items/learn_widget.dart';
 import 'package:en_tube/src/ui/menu/mentors/videos/videos_screen.dart';
 import 'package:en_tube/src/widgets/app_bar_widget.dart';
@@ -28,7 +29,17 @@ class _LearnScreenState extends State<LearnScreen> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => VideosScreen(mentorId: 0,),),
+                MaterialPageRoute(
+                  builder: (context) => VideosScreen(
+                    data: MentorModel(
+                      mentorId: 0,
+                      mentorName: '',
+                      description: '',
+                      starCount: 3,
+                      videos: [],
+                    ),
+                  ),
+                ),
               );
             },
             child: LearnWidget(),

@@ -5,6 +5,7 @@ import 'package:en_tube/src/ui/menu/learn/learn_screen.dart';
 import 'package:en_tube/src/ui/menu/progress/progress_screen.dart';
 import 'package:en_tube/src/ui/menu/mentors/mentors_screen.dart';
 import 'package:en_tube/src/ui/menu/profile/profile_screen.dart';
+import 'package:en_tube/src/widgets/lazy_indexed_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -16,14 +17,19 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
+  // Til o'zgarganda ham saqlanib qolishi uchun static o'zgaruvchilar
+  static int _selectedIndex = 0;
 
-  final List<Widget> _screens = const [
-    HomeScreen(),
-    MentorsScreen(),
-    LearnScreen(),
-    ProgressScreen(),
-    ProfileScreen(),
+  // LazyIndexedStack state ni saqlab qolish uchun static GlobalKey
+  static final GlobalKey<State<LazyIndexedStack>> _lazyStackKey = GlobalKey();
+
+  // Lazy loading - screen faqat birinchi marta ochilganda yaratiladi
+  final List<Widget Function()> _screenBuilders = [
+    () => const HomeScreen(),
+    () => const MentorsScreen(),
+    () => const LearnScreen(),
+    () => const ProgressScreen(),
+    () => const ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -36,7 +42,11 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.generalColor,
-      body: IndexedStack(index: _selectedIndex, children: _screens),
+      body: LazyIndexedStack(
+        key: _lazyStackKey,
+        index: _selectedIndex,
+        children: _screenBuilders,
+      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [

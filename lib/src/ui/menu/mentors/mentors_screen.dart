@@ -29,12 +29,22 @@ class _LessonsScreenState extends State<MentorsScreen> {
         builder: (context, snapshot) {
           // Loading holati
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(
+                color: AppColor.white,
+                strokeWidth: 3,
+              ),
+            );
           }
 
           // Xatolik holati
           if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(
+              child: Text(
+                'Error: ${snapshot.error}',
+                style: TextStyle(color: AppColor.white),
+              ),
+            );
           }
 
           // Ma'lumot yo'q holati - default storylarni ko'rsatish
@@ -59,7 +69,7 @@ class _LessonsScreenState extends State<MentorsScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                VideosScreen(mentorId: mentors[index].mentorId),
+                                VideosScreen(data: mentors[index]),
                           ),
                         );
                       },

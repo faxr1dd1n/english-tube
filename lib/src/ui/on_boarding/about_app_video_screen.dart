@@ -1,4 +1,5 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/service/run_app_services.dart';
 import 'package:en_tube/src/ui/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -20,7 +21,7 @@ class _AboutAppVideoScreenState extends State<AboutAppVideoScreen> {
     _controller = VideoPlayerController.asset("assets/videos/on_boarding.MP4")
       ..initialize().then((_) {
         _controller.play();
-        _controller.setLooping(true);
+        _controller.setLooping(false);
         setState(() {});
       });
   }
@@ -49,7 +50,10 @@ class _AboutAppVideoScreenState extends State<AboutAppVideoScreen> {
                   ),
                 )
               : const Center(
-                  child: CircularProgressIndicator(color: AppColor.white),
+                  child: CircularProgressIndicator(
+                    color: AppColor.white,
+                    strokeWidth: 3,
+                  ),
                 ),
           Positioned(
             bottom: 0,
@@ -72,27 +76,31 @@ class _AboutAppVideoScreenState extends State<AboutAppVideoScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   GestureDetector(
-                    onTap: () {
+                    onTap: ()async {
+                      await RunAppServices.saveIsFirstOpenApp(true);
                       Navigator.pushReplacement(
                         context,
                         PageRouteBuilder(
-                          pageBuilder: (context, animation, secondaryAnimation) {
-                            return LoginScreen();
-                          },
-                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                            const begin = Offset(1.0, 0.0);
-                            const end = Offset.zero;
-                            const curve = Curves.easeInOut;
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) {
+                                return LoginScreen();
+                              },
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                                const begin = Offset(1.0, 0.0);
+                                const end = Offset.zero;
+                                const curve = Curves.easeInOut;
 
-                            var tween = Tween(begin: begin, end: end).chain(
-                              CurveTween(curve: curve),
-                            );
+                                var tween = Tween(
+                                  begin: begin,
+                                  end: end,
+                                ).chain(CurveTween(curve: curve));
 
-                            return SlideTransition(
-                              position: animation.drive(tween),
-                              child: child,
-                            );
-                          },
+                                return SlideTransition(
+                                  position: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
                           transitionDuration: const Duration(milliseconds: 500),
                         ),
                       );
@@ -116,7 +124,6 @@ class _AboutAppVideoScreenState extends State<AboutAppVideoScreen> {
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
-
                             Icon(
                               Icons.keyboard_double_arrow_right_sharp,
                               color: AppColor.gray200,

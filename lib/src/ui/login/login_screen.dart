@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: isLoading ? null : login,
                         child: isLoading
                             ? const CircularProgressIndicator(
-
+                      strokeWidth: 3,
                                 valueColor:
                                     AlwaysStoppedAnimation<Color>(AppColor.generalColor),
                             )

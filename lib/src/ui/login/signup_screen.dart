@@ -80,7 +80,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       // User name'ni Firebase'ga saqlash
       print("Saving username: ${nameController.text}");
       await authService.value.updateUsername(userName: nameController.text);
-      print("Username after update: ${authService.value.currentUser?.displayName}");
+      print(
+        "Username after update: ${authService.value.currentUser?.displayName}",
+      );
 
       setState(() => isLoading = false);
 
@@ -275,6 +277,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           onPressed: isLoading ? null : register,
                           child: isLoading
                               ? const CircularProgressIndicator(
+                                  strokeWidth: 3,
                                   valueColor: AlwaysStoppedAnimation<Color>(
                                     AppColor.generalColor,
                                   ),

@@ -66,7 +66,7 @@ class _MentorWidgetState extends State<MentorWidget> {
                     ),
                     SizedBox(width: 4),
                     Text(
-                      '${widget.mentorModel.videoCount} videos',
+                      '${widget.mentorModel.videos.length} videos',
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],
@@ -80,7 +80,7 @@ class _MentorWidgetState extends State<MentorWidget> {
                     ),
                     SizedBox(width: 4),
                     Text(
-                      '${widget.mentorModel.viewCount} views',
+                      '${100} views',
                       style: TextStyle(color: Colors.grey),
                     ),
                   ],

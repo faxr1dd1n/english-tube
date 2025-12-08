@@ -8,7 +8,8 @@ class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor:backgroundColor?? AppColor.generalColor,
+      centerTitle: true,
+      backgroundColor: backgroundColor ?? AppColor.generalColor,
       elevation: 2,
       shadowColor: const Color.fromARGB(
         255,
@@ -16,7 +17,10 @@ class AppBarWidget extends StatelessWidget {
         255,
         255,
       ).withValues(alpha: 0.2),
-      title: Text(title, style: TextStyle(color: AppColor.white)),
+      title: Text(
+        title,
+        style: TextStyle(color: AppColor.white, fontWeight: FontWeight.bold),
+      ),
     );
   }
 }

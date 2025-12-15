@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/story_model.dart';
 import 'package:flutter/material.dart';
@@ -64,37 +65,41 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
               ),
             )
           : const SizedBox.shrink(),
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: NetworkImage(pageData.imageUrl),
-            fit: BoxFit.contain, // Formatni saqlab qoladi
-            alignment: Alignment.center,
-          ),
-          color: Colors.black, // Rasm atrofida qora fon
+      body: Stack(
+  children: [
+    Positioned.fill(
+      child: CachedNetworkImage(
+        imageUrl: pageData.imageUrl,
+        fit: BoxFit.contain,
+        alignment: Alignment.center,
+        placeholder: (context, url) => const Center(
+          child: CircularProgressIndicator(color: Colors.white),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                pageData.text,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
+        errorWidget: (context, url, error) => const Center(
+          child: Icon(Icons.error, color: Colors.white, size: 50),
         ),
       ),
+    ),
+
+    // Text overlay
+    Positioned(
+      bottom: 20,
+      left: 20,
+      right: 20,
+      child: Text(
+        pageData.text,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ],
+),
+
     );
   }
 
@@ -127,10 +132,9 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
       color: AppColor.white,
       borderRadius: BorderRadius.circular(_borderRadius - 3),
       image: DecorationImage(
-        image: NetworkImage(imageUrl),
-        fit: BoxFit.cover, // List ichida to'liq to'ldiradi
-        alignment: Alignment.center,
-      ),
+  image: CachedNetworkImageProvider(imageUrl),
+  fit: BoxFit.cover,
+)
     );
   }
 

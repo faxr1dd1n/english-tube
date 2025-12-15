@@ -1,4 +1,5 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/ui/menu/progress/line_chart_sample.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_barchart_widget.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_type_widget.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_widget.dart';
@@ -31,6 +32,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
             children: [
               StatTypeWidget(),
               SizedBox(height: 10),
+              LineChartSample(),
+
+              SizedBox(height: 20),
               StatBarchartWidget(),
               SizedBox(height: 20),
               Row(
@@ -51,6 +55,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
                   ),
                 ],
               ),
+              SizedBox(height: 20),
             ],
           ),
         ),

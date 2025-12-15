@@ -1,5 +1,6 @@
-import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/constraints/app_images.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
+import 'package:en_tube/src/widgets/star_rating_widget.dart';
 import 'package:flutter/material.dart';
 
 class MentorWidget extends StatefulWidget {
@@ -13,7 +14,6 @@ class _MentorWidgetState extends State<MentorWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18.0),
@@ -32,8 +32,8 @@ class _MentorWidgetState extends State<MentorWidget> {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
-            child: Image.network(
-              'https://thumbs.dreamstime.com/b/avatar-teacher-book-his-hands-d-style-adorable-cartoon-310669103.jpg',
+            child: Image.asset(
+              AppImages.mentor,
               width: 80,
               height: 80,
               fit: BoxFit.cover,
@@ -57,6 +57,7 @@ class _MentorWidgetState extends State<MentorWidget> {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 14.0, color: Colors.grey),
                 ),
+                SizedBox(height: 8),
                 Row(
                   children: [
                     Icon(
@@ -71,21 +72,21 @@ class _MentorWidgetState extends State<MentorWidget> {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.remove_red_eye_outlined,
-                      size: 18,
-                      color: Colors.grey,
-                    ),
-                    SizedBox(width: 4),
-                    Text(
-                      '${100} views',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-                Row(children: _buildStarRating(widget.mentorModel.starCount)),
+                // Row(
+                //   children: [
+                //     Icon(
+                //       Icons.remove_red_eye_outlined,
+                //       size: 18,
+                //       color: Colors.grey,
+                //     ),
+                //     SizedBox(width: 4),
+                //     Text(
+                //       '${100} views',
+                //       style: TextStyle(color: Colors.grey),
+                //     ),
+                //   ],
+                // ),
+                Row(children: buildStarRating(widget.mentorModel.starCount)),
               ],
             ),
           ),
@@ -95,22 +96,3 @@ class _MentorWidgetState extends State<MentorWidget> {
   }
 }
 
-List<Widget> _buildStarRating(double rating) {
-  List<Widget> stars = [];
-  int fullStars = rating.floor();
-  bool hasHalfStar = (rating - fullStars) >= 0.5;
-
-  for (int i = 0; i < fullStars; i++) {
-    stars.add(Icon(Icons.star, color: AppColor.yellow));
-  }
-
-  if (hasHalfStar) {
-    stars.add(Icon(Icons.star_half, color: AppColor.yellow));
-  }
-
-  while (stars.length < 5) {
-    stars.add(Icon(Icons.star_border_outlined, color: AppColor.yellow));
-  }
-
-  return stars;
-}

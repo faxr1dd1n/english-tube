@@ -1,21 +1,16 @@
+import 'package:en_tube/src/bloc/mentor/mentor_bloc.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
-import 'package:en_tube/src/model/mentor_model.dart';
-import 'package:en_tube/src/service/firestore_mentor_service.dart';
 import 'package:en_tube/src/ui/menu/mentors/items/mentor_widget.dart';
 import 'package:en_tube/src/ui/menu/mentors/videos/videos_screen.dart';
 import 'package:en_tube/src/widgets/app_bar_widget.dart';
 import 'package:en_tube/src/widgets/app_search_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
 
-class MentorsScreen extends StatefulWidget {
+class MentorsScreen extends StatelessWidget {
   const MentorsScreen({super.key});
 
-  @override
-  State<MentorsScreen> createState() => _LessonsScreenState();
-}
-
-class _LessonsScreenState extends State<MentorsScreen> {
-  final mentorService = FirestoreMentorService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +19,10 @@ class _LessonsScreenState extends State<MentorsScreen> {
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Mentors'),
       ),
-      body: StreamBuilder<List<MentorModel>>(
-        stream: mentorService.getMetorsStream(),
-        builder: (context, snapshot) {
-          // Loading holati
-          if (snapshot.connectionState == ConnectionState.waiting) {
+      body: BlocBuilder<MentorBloc, MentorState>(
+        builder: (context, state) {
+          // Loading holati (initial yoki inProgress)
+          if (state.mentorsStatus.isInitial || state.mentorsStatus.isInProgress) {
             return Center(
               child: CircularProgressIndicator(
                 color: AppColor.white,
@@ -38,23 +32,21 @@ class _LessonsScreenState extends State<MentorsScreen> {
           }
 
           // Xatolik holati
-          if (snapshot.hasError) {
+          if (state.mentorsStatus == FormzSubmissionStatus.failure) {
             return Center(
               child: Text(
-                'Error: ${snapshot.error}',
+                'Error: ${state.errorMessage}',
                 style: TextStyle(color: AppColor.white),
               ),
             );
           }
 
-          // Ma'lumot yo'q holati - default storylarni ko'rsatish
-          final mentors = snapshot.data ?? [];
+          final mentors = state.mentors;
 
           return SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: 16),
-
                 AppSearchWidget(),
                 SizedBox(height: 4),
                 ListView.builder(
@@ -68,8 +60,10 @@ class _LessonsScreenState extends State<MentorsScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                VideosScreen(data: mentors[index]),
+                            builder: (_) => BlocProvider.value(
+                              value: context.read<MentorBloc>(),
+                              child: VideosScreen(data: mentors[index]),
+                            ),
                           ),
                         );
                       },

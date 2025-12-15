@@ -1,52 +1,37 @@
+import 'package:en_tube/src/bloc/mentor/mentor_bloc.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
 import 'package:en_tube/src/ui/menu/mentors/videos/video_page.dart';
+import 'package:en_tube/src/widgets/app_bar_widget.dart';
 import 'package:en_tube/src/widgets/app_search_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class VideosScreen extends StatefulWidget {
+class VideosScreen extends StatelessWidget {
   const VideosScreen({required this.data, super.key});
   final MentorModel data;
-  @override
-  State<VideosScreen> createState() => _VideosScreenState();
-}
-
-class _VideosScreenState extends State<VideosScreen> {
-  // Test video URLs that allow embedding
-  // List<String> videoUrls = [
-  //   "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  //   "https://youtu.be/jNQXAC9IVRw",
-  //   "https://www.youtube.com/watch?v=9bZkp7q19f0",
-  //   "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  //   "https://youtu.be/jNQXAC9IVRw",
-  //   "https://www.youtube.com/watch?v=9bZkp7q19f0",
-  // ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.generalColor,
-      appBar: AppBar(
-        foregroundColor: AppColor.white,
-        backgroundColor: AppColor.generalColor,
-        elevation: 2,
-        shadowColor: const Color.fromARGB(
-          255,
-          255,
-          255,
-          255,
-        ).withValues(alpha: 0.2),
-        title: const Text('Videos', style: TextStyle(color: AppColor.white)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(kToolbarHeight),
+        child: AppBarWidget(title: 'Videos'),
       ),
-      body: 
-          // Loading holati
-          
-           SingleChildScrollView(
+      body: BlocBuilder<MentorBloc, MentorState>(
+        builder: (context, state) {
+          // State'dan mentorni topish
+          final mentor = state.mentors.firstWhere(
+            (m) => m.mentorId == data.mentorId,
+            orElse: () => data,
+          );
+
+          return SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: 16),
-
                 AppSearchWidget(),
                 ListView.separated(
                   shrinkWrap: true,
@@ -55,18 +40,21 @@ class _VideosScreenState extends State<VideosScreen> {
                     horizontal: 16,
                   ),
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: widget.data.videos.length,
+                  itemCount: mentor.videos.length,
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: 16),
                   itemBuilder: (_, index) {
                     return VideoThumbnail(
-                      model: widget.data.videos[index],
+                      model: mentor.videos[index],
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => VideoPage(
-                              videoUrl: widget.data.videos[index].videoUrl,
+                            builder: (_) => BlocProvider.value(
+                              value: context.read<MentorBloc>(),
+                              child: VideoPage(
+                                model: mentor.videos[index],
+                              ),
                             ),
                           ),
                         );
@@ -76,9 +64,9 @@ class _VideosScreenState extends State<VideosScreen> {
                 ),
               ],
             ),
-          ),
-        
-      
+          );
+        },
+      ),
     );
   }
 }
@@ -156,22 +144,13 @@ class VideoThumbnail extends StatelessWidget {
               ),
             ),
 
-            Row(
-              children: [
-                Icon(Icons.star, color: AppColor.yellow),
-                Icon(Icons.star, color: AppColor.yellow),
-                Icon(Icons.star, color: AppColor.yellow),
-                Icon(Icons.star_half, color: AppColor.yellow),
-                Icon(Icons.star_border_outlined, color: AppColor.yellow),
-              ],
-            ),
             SizedBox(height: 8),
             Row(
               children: [
                 Icon(Icons.thumb_up_alt, color: AppColor.white),
                 SizedBox(width: 8),
                 Text(
-                  model.likeCount.toString(),
+                  model.likes.likeCount.toString(),
                   style: TextStyle(
                     color: AppColor.white,
                     fontSize: 14,
@@ -183,7 +162,7 @@ class VideoThumbnail extends StatelessWidget {
                 Icon(Icons.thumb_down, color: AppColor.gray300),
                 SizedBox(width: 8),
                 Text(
-                  model.dislikeCount.toString(),
+                  model.likes.dislikeCount.toString(),
                   style: TextStyle(
                     color: AppColor.white,
                     fontSize: 14,

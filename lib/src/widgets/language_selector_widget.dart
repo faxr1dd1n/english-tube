@@ -84,20 +84,16 @@ class LanguageSelectorWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<LocaleProvider>(
       builder: (context, localeProvider, _) {
-        String currentLanguage = '';
         String currentFlag = '';
 
         switch (localeProvider.locale.languageCode) {
           case 'uz':
-            currentLanguage = 'O\'zbek';
             currentFlag = '🇺🇿';
             break;
           case 'en':
-            currentLanguage = 'English';
             currentFlag = '🇬🇧';
             break;
           case 'ru':
-            currentLanguage = 'Русский';
             currentFlag = '🇷🇺';
             break;
         }
@@ -207,7 +203,8 @@ class _LanguageOption extends StatelessWidget {
             ),
             isSelected?
               const Icon(Icons.check_circle, color: Colors.green, size: 24):
-              Icon(Icons.check_circle),
+              Icon(Icons.check_circle,size: 
+              24,color: AppColor.gray400,),
           ],
         ),
       ),

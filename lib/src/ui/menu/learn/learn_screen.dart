@@ -1,4 +1,5 @@
 import 'package:en_tube/src/constraints/app_color.dart';
+import 'package:en_tube/src/constraints/app_icons.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
 import 'package:en_tube/src/ui/menu/learn/items/learn_widget.dart';
 import 'package:en_tube/src/ui/menu/mentors/videos/videos_screen.dart';
@@ -21,11 +22,10 @@ class _LearnScreenState extends State<LearnScreen> {
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Lessons'),
       ),
-      body: ListView.builder(
+      body: ListView(
         padding: const EdgeInsets.all(16.0),
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return GestureDetector(
+        children: [
+          GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
@@ -42,9 +42,82 @@ class _LearnScreenState extends State<LearnScreen> {
                 ),
               );
             },
-            child: LearnWidget(),
-          );
-        },
+            child: LearnWidget(
+              icon: AppIcons.bookA,
+              title: 'Reading',
+              description: 'Brief description of the lesson goes here.',
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VideosScreen(
+                    data: MentorModel(
+                      mentorId: 0,
+                      mentorName: '',
+                      description: '',
+                      starCount: 3,
+                      videos: [],
+                    ),
+                  ),
+                ),
+              );
+            },
+            child: LearnWidget(
+              icon: AppIcons.notebookPen,
+              title: 'Check your grammar',
+              description: 'Brief description of the lesson goes here.',
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VideosScreen(
+                    data: MentorModel(
+                      mentorId: 0,
+                      mentorName: '',
+                      description: '',
+                      starCount: 3,
+                      videos: [],
+                    ),
+                  ),
+                ),
+              );
+            },
+            child: LearnWidget(
+              icon: AppIcons.podcast,
+              title: 'Podcasts',
+              description: 'Brief description of the lesson goes here.',
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VideosScreen(
+                    data: MentorModel(
+                      mentorId: 0,
+                      mentorName: '',
+                      description: '',
+                      starCount: 3,
+                      videos: [],
+                    ),
+                  ),
+                ),
+              );
+            },
+            child: LearnWidget(
+              icon: AppIcons.languages,
+              title: 'Traslator',
+              description: 'Brief description of the lesson goes here.',
+            ),
+          ),
+        ],
       ),
     );
   }

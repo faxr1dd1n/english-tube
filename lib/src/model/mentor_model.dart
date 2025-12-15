@@ -21,9 +21,9 @@ class MentorModel {
 
     List<VideoModel> videoList = [];
     if (data['videos'] != null) {
-      videoList = List<Map<String, dynamic>>.from(data['videos'])
-          .map((v) => VideoModel.fromMap(v))
-          .toList();
+      videoList = List<Map<String, dynamic>>.from(
+        data['videos'],
+      ).map((v) => VideoModel.fromMap(v)).toList();
     }
 
     return MentorModel(
@@ -50,16 +50,17 @@ class MentorModel {
 class VideoModel {
   final String videoUrl;
   final String videoName;
-  final int likeCount;
-  final int dislikeCount;
   final int mentorId;
+  final int videoId;
+
+  final LikeModel likes;
 
   VideoModel({
     required this.videoUrl,
     required this.videoName,
-    required this.likeCount,
-    required this.dislikeCount,
     required this.mentorId,
+    required this.videoId,
+    required this.likes,
   });
 
   // Map orqali Firestore'dan olish
@@ -67,9 +68,15 @@ class VideoModel {
     return VideoModel(
       videoUrl: data['video_url'] ?? '',
       videoName: data['video_name'] ?? '',
-      likeCount: data['like_count'] ?? 0,
-      dislikeCount: data['dislike_count'] ?? 0,
       mentorId: data['mentor_id'] ?? 0,
+      videoId: data['video_id'] ?? 0,
+      likes: data['likes'] != null
+          ? LikeModel.fromMap(data['likes'] as Map<String, dynamic>)
+          : LikeModel(
+              userIds: [],
+              likeCount: 0,
+              dislikeCount: 0,
+            ),
     );
   }
 
@@ -83,9 +90,72 @@ class VideoModel {
     return {
       'video_url': videoUrl,
       'video_name': videoName,
+      'mentor_id': mentorId,
+      'video_id': videoId,
+      'likes': likes,
+    };
+  }
+}
+
+class LikeModel {
+  final List<UserLikeStatus> userIds;
+  final int likeCount;
+  final int dislikeCount;
+
+  LikeModel({
+    required this.userIds,
+    required this.likeCount,
+    required this.dislikeCount,
+  });
+
+  factory LikeModel.fromMap(Map<String, dynamic> data) {
+    List<UserLikeStatus> userIdsList = [];
+    if (data['user_ids'] != null && data['user_ids'] is List) {
+      userIdsList = (data['user_ids'] as List)
+          .map((item) => UserLikeStatus.fromMap(item as Map<String, dynamic>))
+          .toList();
+    }
+
+    return LikeModel(
+      userIds: userIdsList,
+      likeCount: data['like_count'] ?? 0,
+      dislikeCount: data['dislike_count'] ?? data['dislike_cout'] ?? 0, // typo fix
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'user_ids': userIds.map((user) => user.toMap()).toList(),
       'like_count': likeCount,
       'dislike_count': dislikeCount,
-      'mentor_id': mentorId,
+    };
+  }
+}
+
+class UserLikeStatus {
+  final String id;
+  final bool isLiked;
+  final bool isDisliked;
+
+  UserLikeStatus({
+    required this.id,
+    required this.isLiked,
+    required this.isDisliked,
+  });
+
+  factory UserLikeStatus.fromMap(Map<String, dynamic> data) {
+    return UserLikeStatus(
+      id: data['id'] ?? '',
+      isLiked: data['is_liked'] ?? false,
+      isDisliked: data['is_disliked'] ?? false,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'is_liked': isLiked,
+      'is_disliked': isDisliked,
     };
   }
 }

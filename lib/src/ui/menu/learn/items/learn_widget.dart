@@ -1,7 +1,19 @@
+import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LearnWidget extends StatefulWidget {
-  const LearnWidget({super.key});
+  const LearnWidget({
+    required this.icon,
+    required this.title,
+    this.description,
+
+    super.key,
+  });
+  final String icon;
+  final String title;
+  final String? description;
+
   @override
   State<LearnWidget> createState() => _LearnWidgetState();
 }
@@ -10,7 +22,6 @@ class _LearnWidgetState extends State<LearnWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18.0),
@@ -27,29 +38,26 @@ class _LearnWidgetState extends State<LearnWidget> {
       padding: const EdgeInsets.all(16.0),
       child: Row(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Image.asset(
-              'assets/images/book.png',
-              width: 70,
-              height: 80,
-              fit: BoxFit.fill,
-            ),      
+          SvgPicture.asset(
+            widget.icon,
+            width: 40.0,
+            height: 40.0,
+            color: AppColor.blue600,
           ),
           SizedBox(width: 8.0),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
-                  'Reading',
+                  widget.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Brief description of the lesson goes here.',
+                  widget.description ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 14.0, color: Colors.grey),

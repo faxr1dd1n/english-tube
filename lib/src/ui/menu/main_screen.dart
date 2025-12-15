@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:en_tube/src/bloc/mentor/mentor_bloc.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/constraints/app_icons.dart';
 import 'package:en_tube/src/ui/menu/home/home_screen.dart';
@@ -7,7 +9,10 @@ import 'package:en_tube/src/ui/menu/mentors/mentors_screen.dart';
 import 'package:en_tube/src/ui/menu/profile/profile_screen.dart';
 import 'package:en_tube/src/widgets/lazy_indexed_stack.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter/services.dart';
+
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -20,8 +25,8 @@ class _MainScreenState extends State<MainScreen> {
   // Til o'zgarganda ham saqlanib qolishi uchun static o'zgaruvchilar
   static int _selectedIndex = 0;
 
-  // LazyIndexedStack state ni saqlab qolish uchun static GlobalKey
-  static final GlobalKey<State<LazyIndexedStack>> _lazyStackKey = GlobalKey();
+  // LazyIndexedStack state ni saqlab qolish uchun GlobalKey
+  final GlobalKey<State<LazyIndexedStack>> _lazyStackKey = GlobalKey();
 
   // Lazy loading - screen faqat birinchi marta ochilganda yaratiladi
   final List<Widget Function()> _screenBuilders = [
@@ -33,6 +38,10 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   void _onItemTapped(int index) {
+    if (Platform.isIOS) {
+        HapticFeedback.lightImpact();
+    }
+
     setState(() {
       _selectedIndex = index;
     });
@@ -40,14 +49,16 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColor.generalColor,
-      body: LazyIndexedStack(
-        key: _lazyStackKey,
-        index: _selectedIndex,
-        children: _screenBuilders,
-      ),
-      bottomNavigationBar: Container(
+    return BlocProvider(
+      create: (context) => MentorBloc()..add(GetMentorsEvent()),
+      child: Scaffold(
+        backgroundColor: AppColor.generalColor,
+        body: LazyIndexedStack(
+          key: _lazyStackKey,
+          index: _selectedIndex,
+          children: _screenBuilders,
+        ),
+        bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -101,7 +112,6 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 label: 'Mentors',
               ),
-
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   AppIcons.learnMenu,
@@ -120,7 +130,6 @@ class _MainScreenState extends State<MainScreen> {
                 ),
                 label: 'Progress',
               ),
-
               BottomNavigationBarItem(
                 icon: SvgPicture.asset(
                   AppIcons.profileMenu,
@@ -133,6 +142,7 @@ class _MainScreenState extends State<MainScreen> {
             ],
           ),
         ),
+      ),
       ),
     );
   }

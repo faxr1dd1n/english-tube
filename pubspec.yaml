@@ -47,6 +47,12 @@ dependencies:
   video_player: ^2.10.1
   flutter_svg: ^2.2.3
   easy_localization: ^3.0.8
+  cached_network_image: ^3.4.1
+  flutter_bloc: ^9.1.1
+  bloc: ^9.1.0
+  equatable: ^2.0.7
+  formz: ^0.8.0
+  fl_chart: ^0.68.0
 
 dev_dependencies:
   flutter_test:

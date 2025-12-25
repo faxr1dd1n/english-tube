@@ -1,4 +1,3 @@
-import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/ui/menu/progress/line_chart_sample.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_barchart_widget.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_type_widget.dart';
@@ -17,7 +16,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.generalColor,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Progress'),

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Splash / primary background color: AppColor.generalColor (#152B62) -->
+    <color name="splash_color">#FF152B62</color>
+</resources>
+

@@ -154,7 +154,7 @@ class _LineChartSampleState extends State<LineChartSample> {
           if (response?.lineBarSpots != null &&
               response!.lineBarSpots!.isNotEmpty) {
             // User nuqtani tanladi - bu yerda vibrate qiling
-            HapticFeedback.selectionClick(); // yoki HapticFeedback.lightImpact()
+             HapticFeedback.lightImpact();
           }
         },
 

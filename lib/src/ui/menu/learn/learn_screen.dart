@@ -1,4 +1,3 @@
-import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/constraints/app_icons.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
 import 'package:en_tube/src/ui/menu/learn/items/learn_widget.dart';
@@ -17,7 +16,7 @@ class _LearnScreenState extends State<LearnScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.generalColor,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Lessons'),

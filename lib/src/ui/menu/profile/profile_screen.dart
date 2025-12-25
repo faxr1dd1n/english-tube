@@ -1,4 +1,3 @@
-import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/login_screen.dart';
 import 'package:en_tube/src/widgets/app_bar_widget.dart';
@@ -69,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Text(
             "$label:",
             style: TextStyle(
-              color: AppColor.white.withValues(alpha: 0.7),
+              color: Colors.white.withValues(alpha: 0.7),
               fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
@@ -80,7 +79,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Text(
             value,
             style: const TextStyle(
-              color: AppColor.white,
+              color: Colors.white,
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
@@ -94,7 +93,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.generalColor,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Profile'),
@@ -145,7 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   const Text(
                     "User Information",
                     style: TextStyle(
-                      color: AppColor.white,
+                      color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),

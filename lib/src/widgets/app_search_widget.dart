@@ -29,6 +29,10 @@ class _AppSearchWidgetState extends State<AppSearchWidget> {
         decoration: InputDecoration(
           hintText: 'Search...',
           border: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          focusedBorder: InputBorder.none,
+          filled: false,
+          fillColor: Colors.transparent,
           contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           suffixIcon: Icon(Icons.search),
         ),

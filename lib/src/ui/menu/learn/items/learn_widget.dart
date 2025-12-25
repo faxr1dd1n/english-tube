@@ -54,7 +54,7 @@ class _LearnWidgetState extends State<LearnWidget> {
                   widget.title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold,color: AppColor.gray800),
                 ),
                 Text(
                   widget.description ?? '',

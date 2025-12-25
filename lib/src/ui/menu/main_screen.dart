@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:en_tube/src/bloc/mentor/mentor_bloc.dart';
-import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/constraints/app_icons.dart';
 import 'package:en_tube/src/ui/menu/home/home_screen.dart';
 import 'package:en_tube/src/ui/menu/learn/learn_screen.dart';
@@ -52,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
     return BlocProvider(
       create: (context) => MentorBloc()..add(GetMentorsEvent()),
       child: Scaffold(
-        backgroundColor: AppColor.generalColor,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         body: LazyIndexedStack(
           key: _lazyStackKey,
           index: _selectedIndex,
@@ -75,14 +74,14 @@ class _MainScreenState extends State<MainScreen> {
           ),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            backgroundColor: AppColor.generalColor,
+            backgroundColor: Theme.of(context).colorScheme.primary,
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
-            unselectedItemColor: AppColor.white.withOpacity(0.5),
-            selectedItemColor: AppColor.white,
-            selectedIconTheme: const IconThemeData(color: AppColor.white),
+            unselectedItemColor: Colors.white.withOpacity(0.5),
+            selectedItemColor: Colors.white,
+            selectedIconTheme: const IconThemeData(color: Colors.white),
             unselectedIconTheme: IconThemeData(
-              color: AppColor.white.withOpacity(0.5),
+              color: Colors.white.withOpacity(0.5),
             ),
             selectedFontSize: 12,
             unselectedFontSize: 12,
@@ -94,8 +93,8 @@ class _MainScreenState extends State<MainScreen> {
                 icon: SvgPicture.asset(
                   AppIcons.homeMenu,
                   color: _selectedIndex == 0
-                      ? AppColor.white
-                      : AppColor.white.withOpacity(0.5),
+                      ? Colors.white
+                      : Colors.white.withOpacity(0.5),
                 ),
                 label: 'Home',
               ),
@@ -105,8 +104,8 @@ class _MainScreenState extends State<MainScreen> {
                   child: SvgPicture.asset(
                     AppIcons.mentorMenu,
                     color: _selectedIndex == 1
-                        ? AppColor.white
-                        : AppColor.white.withOpacity(0.5),
+                        ? Colors.white
+                        : Colors.white.withOpacity(0.5),
                         height:28,
                   ),
                 ),
@@ -116,8 +115,8 @@ class _MainScreenState extends State<MainScreen> {
                 icon: SvgPicture.asset(
                   AppIcons.learnMenu,
                   color: _selectedIndex == 2
-                      ? AppColor.white
-                      : AppColor.white.withOpacity(0.5),
+                      ? Colors.white
+                      : Colors.white.withOpacity(0.5),
                 ),
                 label: 'Learn',
               ),
@@ -125,8 +124,8 @@ class _MainScreenState extends State<MainScreen> {
                 icon: SvgPicture.asset(
                   AppIcons.chartMenu,
                   color: _selectedIndex == 3
-                      ? AppColor.white
-                      : AppColor.white.withOpacity(0.5),
+                      ? Colors.white
+                      : Colors.white.withOpacity(0.5),
                 ),
                 label: 'Progress',
               ),
@@ -134,8 +133,8 @@ class _MainScreenState extends State<MainScreen> {
                 icon: SvgPicture.asset(
                   AppIcons.profileMenu,
                   color: _selectedIndex == 4
-                      ? AppColor.white
-                      : AppColor.white.withOpacity(0.5),
+                      ? Colors.white
+                      : Colors.white.withOpacity(0.5),
                 ),
                 label: 'Profile',
               ),

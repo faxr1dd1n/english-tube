@@ -117,8 +117,8 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
                 overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: AppColor.white,
-              fontWeight: FontWeight.normal,
-              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+              fontSize: 12.0,
             ),
             textAlign: TextAlign.center,
           ),
@@ -164,7 +164,7 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
   @override
   Widget build(BuildContext context) {
     return StoryListView(
-      listHeight: 180.0,
+      listHeight: 170.0,
       pageTransform: const StoryPage3DTransform(),
       buttonDatas: widget.stories.map((story) {
         return StoryButtonData(

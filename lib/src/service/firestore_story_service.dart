@@ -5,18 +5,7 @@ class FirestoreStoryService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _collectionName = 'stories';
 
-  // Stream orqali barcha storylarni olish (real-time)
-  Stream<List<StoryData>> getStoriesStream() {
-    return _firestore
-        .collection(_collectionName)
-        .orderBy('createdAt', descending: false)
-        .snapshots()
-        .map((snapshot) {
-      return snapshot.docs.map((doc) => StoryData.fromFirestore(doc)).toList();
-    });
-  }
-
-  // Barcha storylarni bir marta olish
+  // Barcha storylarni bir marta olish (realtime emas)
   Future<List<StoryData>> getStories() async {
     final snapshot = await _firestore
         .collection(_collectionName)

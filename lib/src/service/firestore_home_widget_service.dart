@@ -5,20 +5,7 @@ class FirestoreHomeWidgetService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final String _collectionName = 'home_widget';
 
-  // Stream orqali barcha home widgetlarni olish (real-time)
-  Stream<List<HomeWidgetModel>> getHomeWidgetsStream() {
-    return _firestore.collection(_collectionName).snapshots().map((snapshot) {
-      final widgets = snapshot.docs.map((doc) {
-        final widget = HomeWidgetModel.fromFirestore(doc);
-
-        return widget;
-      }).toList();
-
-      return widgets;
-    });
-  }
-
-  // Barcha home widgetlarni bir marta olish
+  // Barcha home widgetlarni bir marta olish (realtime emas)
   Future<List<HomeWidgetModel>> getHomeWidgets() async {
     final snapshot = await _firestore.collection(_collectionName).get();
 

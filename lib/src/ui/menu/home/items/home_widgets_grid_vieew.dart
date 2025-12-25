@@ -22,7 +22,14 @@ class HomeWidgetsGridVieew extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           return Container(
+
+            
             decoration: BoxDecoration(
+                gradient: LinearGradient(
+            colors: [Colors.purple, Colors.blue],
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+          ),
               color: AppColor.white,
               borderRadius: BorderRadius.circular(12),
             ),
@@ -41,7 +48,7 @@ class HomeWidgetsGridVieew extends StatelessWidget {
                       : widgetModel[index].imageUrl == "speaking"
                       ? Icons.record_voice_over_rounded
                       : Icons.help_outline,
-                  color: AppColor.blue,
+                  color: AppColor.white,
                   size: 35,
                 ),
                 SizedBox(height: 6),
@@ -50,9 +57,9 @@ class HomeWidgetsGridVieew extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
-                    color: AppColor.dark,
+                    color: AppColor.white,
                   ),
-                ),
+                ),  
               ],
             ),
           );

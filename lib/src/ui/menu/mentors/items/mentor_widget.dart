@@ -1,3 +1,4 @@
+import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/constraints/app_images.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
 import 'package:en_tube/src/widgets/star_rating_widget.dart';
@@ -49,7 +50,11 @@ class _MentorWidgetState extends State<MentorWidget> {
                   widget.mentorModel.mentorName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.dark,
+                  ),
                 ),
                 Text(
                   widget.mentorModel.description,
@@ -95,4 +100,3 @@ class _MentorWidgetState extends State<MentorWidget> {
     );
   }
 }
-

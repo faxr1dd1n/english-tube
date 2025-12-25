@@ -1,5 +1,4 @@
 import 'package:en_tube/src/bloc/mentor/mentor_bloc.dart';
-import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/ui/menu/mentors/items/mentor_widget.dart';
 import 'package:en_tube/src/ui/menu/mentors/videos/videos_screen.dart';
 import 'package:en_tube/src/widgets/app_bar_widget.dart';
@@ -14,7 +13,7 @@ class MentorsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.generalColor,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
         child: AppBarWidget(title: 'Mentors'),
@@ -25,7 +24,7 @@ class MentorsScreen extends StatelessWidget {
           if (state.mentorsStatus.isInitial || state.mentorsStatus.isInProgress) {
             return Center(
               child: CircularProgressIndicator(
-                color: AppColor.white,
+                color: Colors.white,
                 strokeWidth: 3,
               ),
             );
@@ -36,7 +35,7 @@ class MentorsScreen extends StatelessWidget {
             return Center(
               child: Text(
                 'Error: ${state.errorMessage}',
-                style: TextStyle(color: AppColor.white),
+                style: TextStyle(color: Colors.white),
               ),
             );
           }

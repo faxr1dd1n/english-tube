@@ -24,7 +24,6 @@ class _LessonsPageViewState extends State<LessonsPageView> {
             end: Alignment.topRight,
           ),
           borderRadius: BorderRadius.circular(30),
-          color: AppColor.green,
         ),
         margin: EdgeInsets.only(right: 10, left: 6),
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -42,6 +41,8 @@ class _LessonsPageViewState extends State<LessonsPageView> {
             SizedBox(height: 10),
             Text(
               'Ingiliz tilida yuqori marralarni egallang!',
+              textAlign: TextAlign.center,
+
               maxLines: 2,
               style: TextStyle(
                 fontSize: 16,

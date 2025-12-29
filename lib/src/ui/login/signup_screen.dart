@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/login_screen.dart';
@@ -61,8 +62,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     if (passwordController.text != confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Parollar bir xil emas!"),
+        SnackBar(
+          content: Text('auth.passwords_dont_match'.tr()),
           backgroundColor: Colors.red,
         ),
       );
@@ -98,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(e.message ?? 'Aniqlamagan xatolik'),
+            content: Text(e.message ?? 'auth.unknown_error'.tr()),
             backgroundColor: Colors.red,
           ),
         );
@@ -120,18 +121,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 40),
-                const Text(
-                  "Create Account",
-                  style: TextStyle(
+                Text(
+                  'auth.create_account'.tr(),
+                  style: const TextStyle(
                     color: AppColor.white,
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  "Sign up to get started",
-                  style: TextStyle(color: AppColor.white, fontSize: 16),
+                Text(
+                  'auth.sign_up_subtitle'.tr(),
+                  style: const TextStyle(color: AppColor.white, fontSize: 16),
                 ),
                 const SizedBox(height: 30),
 
@@ -140,19 +141,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   style: const TextStyle(color: AppColor.white),
                   cursorColor: AppColor.white,
                   controller: nameController,
-                  decoration: const InputDecoration(
-                    labelText: "Full Name",
-                    labelStyle: TextStyle(color: AppColor.white),
-                    focusedBorder: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    filled: false,
+                    labelText: 'auth.full_name'.tr(),
+                    labelStyle: const TextStyle(color: AppColor.white),
+                    focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       borderSide: BorderSide(color: AppColor.white),
                     ),
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                   ),
                   validator: (v) {
-                    if (v!.isEmpty) return "Ismingizni kiriting";
+                    if (v!.isEmpty) return 'auth.enter_name'.tr();
                     return null;
                   },
                 ),
@@ -165,20 +167,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   cursorColor: AppColor.white,
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: "Email",
-                    labelStyle: TextStyle(color: AppColor.white),
-                    focusedBorder: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    filled: false,
+                    labelText: 'auth.email'.tr(),
+                    labelStyle: const TextStyle(color: AppColor.white),
+                    focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                       borderSide: BorderSide(color: AppColor.white),
                     ),
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
                     ),
                   ),
                   validator: (v) {
-                    if (v!.isEmpty) return "Email kiriting";
-                    if (!v.contains('@')) return "To'g'ri email kiriting";
+                    if (v!.isEmpty) return 'auth.enter_email'.tr();
+                    if (!v.contains('@')) return 'auth.enter_valid_email'.tr();
                     return null;
                   },
                 ),
@@ -192,6 +195,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: passwordController,
                   obscureText: isObscured,
                   decoration: InputDecoration(
+                    filled: false,
                     suffixIcon: GestureDetector(
                       onTap: () {
                         setState(() {
@@ -203,7 +207,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: AppColor.white,
                       ),
                     ),
-                    labelText: "Password",
+                    labelText: 'auth.password'.tr(),
                     labelStyle: const TextStyle(color: AppColor.white),
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -214,9 +218,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   validator: (v) {
-                    if (v!.isEmpty) return "Parol kiriting";
+                    if (v!.isEmpty) return 'auth.enter_password'.tr();
                     if (v.length < 6) {
-                      return "Parol kamida 6 belgidan iborat bo'lishi kerak";
+                      return 'auth.password_min_length'.tr();
                     }
                     return null;
                   },
@@ -231,6 +235,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: confirmPasswordController,
                   obscureText: isObscured,
                   decoration: InputDecoration(
+                    filled: false,
                     suffixIcon: GestureDetector(
                       onTap: () {
                         setState(() {
@@ -242,7 +247,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: AppColor.white,
                       ),
                     ),
-                    labelText: "Confirm Password",
+                    labelText: 'auth.confirm_password'.tr(),
                     labelStyle: const TextStyle(color: AppColor.white),
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -253,7 +258,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   validator: (v) {
-                    if (v!.isEmpty) return "Parolni tasdiqlang";
+                    if (v!.isEmpty) return 'auth.confirm_password_hint'.tr();
                     return null;
                   },
                 ),
@@ -282,9 +287,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     AppColor.generalColor,
                                   ),
                                 )
-                              : const Text(
-                                  "Sign Up",
-                                  style: TextStyle(
+                              : Text(
+                                  'auth.sign_up'.tr(),
+                                  style: const TextStyle(
                                     color: AppColor.generalColor,
                                     fontSize: 18,
                                   ),
@@ -301,9 +306,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
-                      "Already have an account? ",
-                      style: TextStyle(color: AppColor.white, fontSize: 14),
+                    Text(
+                      '${'auth.already_have_account'.tr()} ',
+                      style: const TextStyle(color: AppColor.white, fontSize: 14),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -314,9 +319,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         );
                       },
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(
+                      child: Text(
+                        'auth.login'.tr(),
+                        style: const TextStyle(
                           color: AppColor.white,
                           fontSize: 14,
                           fontWeight: FontWeight.bold,

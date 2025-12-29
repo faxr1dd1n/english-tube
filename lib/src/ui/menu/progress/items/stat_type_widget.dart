@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -39,11 +40,11 @@ class _StatTypeWidgetState extends State<StatTypeWidget> {
                       borderRadius: BorderRadius.circular(12),
                       color: AppColor.gray500,
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Center(
                       child: Text(
-                        'Haftalik',
-                        style: TextStyle(
+                        'progress.weekly'.tr(),
+                        style: const TextStyle(
                           fontSize: 12,
                           color: AppColor.white,
                           fontWeight: FontWeight.w500,
@@ -52,10 +53,10 @@ class _StatTypeWidgetState extends State<StatTypeWidget> {
                     ),
                   )
                 : Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Text(
-                      'Haftalik',
-                      style: TextStyle(
+                      'progress.weekly'.tr(),
+                      style: const TextStyle(
                         fontSize: 12,
                         color: AppColor.white,
                         fontWeight: FontWeight.w500,
@@ -79,11 +80,11 @@ class _StatTypeWidgetState extends State<StatTypeWidget> {
                       borderRadius: BorderRadius.circular(12),
                       color: AppColor.gray500,
                     ),
-                    padding: EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Center(
                       child: Text(
-                        'Kunlik',
-                        style: TextStyle(
+                        'progress.daily'.tr(),
+                        style: const TextStyle(
                           fontSize: 12,
                           color: AppColor.white,
                           fontWeight: FontWeight.w500,
@@ -92,10 +93,10 @@ class _StatTypeWidgetState extends State<StatTypeWidget> {
                     ),
                   )
                 : Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Text(
-                      'Kunlik',
-                      style: TextStyle(
+                      'progress.daily'.tr(),
+                      style: const TextStyle(
                         fontSize: 12,
                         color: AppColor.white,
                         fontWeight: FontWeight.w500,

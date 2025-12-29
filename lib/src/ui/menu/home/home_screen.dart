@@ -1,7 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/bloc/home/home_bloc.dart';
+import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/story_model.dart';
 import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/service/run_app_services.dart';
+import 'package:en_tube/src/ui/menu/home/items/home_drawer.dart';
 import 'package:en_tube/src/ui/menu/home/items/home_story_widget.dart';
 import 'package:en_tube/src/ui/menu/home/items/home_widgets_grid_vieew.dart';
 import 'package:en_tube/src/widgets/app_bar_widget.dart';
@@ -71,10 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: AppBarWidget(
-            title: 'Welcome $userName! 🤗',
+            title: 'home.welcome'.tr(namedArgs: {'name': userName}),
+            textStyle: TextStyle(
+              color: AppColor.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+            ),
+
             isCenterTitle: false,
           ),
         ),
+        drawer: HomeDrawer(),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -122,7 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 170,
                       child: Center(
                         child: Text(
-                          'Error: ${state.errorMessage}',
+                          'common.error'.tr(
+                            namedArgs: {'message': state.errorMessage},
+                          ),
                           style: const TextStyle(color: Colors.white),
                         ),
                       ),
@@ -172,35 +184,38 @@ class _HomeScreenState extends State<HomeScreen> {
                         if (state.homeWidgetsStatus.isInitial ||
                             state.homeWidgetsStatus.isInProgress) {
                           return SizedBox(
-                      height: 90.0,
-                      child: Shimmer.fromColors(
-                        baseColor: Colors.grey.shade300,
-                        highlightColor: Colors.white,
-                        child: ListView.separated(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 4,
-                          separatorBuilder: (_, __) =>
-                              const SizedBox(width: 14),
-                          itemBuilder: (_, __) {
-                            return Column(
-                              children: [
-                                Container(
-                                  width: 80,
-                                  height: 80,
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
+                            height: 90.0,
+                            child: Shimmer.fromColors(
+                              baseColor: Colors.grey.shade300,
+                              highlightColor: Colors.white,
+                              child: ListView.separated(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
                                 ),
-                                SizedBox(height: 10),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                    );
-                
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 4,
+                                separatorBuilder: (_, __) =>
+                                    const SizedBox(width: 14),
+                                itemBuilder: (_, __) {
+                                  return Column(
+                                    children: [
+                                      Container(
+                                        width: 80,
+                                        height: 80,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 10),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ),
+                          );
                         }
 
                         // Xatolik holati
@@ -210,7 +225,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 120,
                             child: Center(
                               child: Text(
-                                'Error: ${state.errorMessage}',
+                                'common.error'.tr(
+                                  namedArgs: {'message': state.errorMessage},
+                                ),
                                 style: const TextStyle(color: Colors.white),
                               ),
                             ),

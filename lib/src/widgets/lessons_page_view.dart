@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -31,27 +32,27 @@ class _LessonsPageViewState extends State<LessonsPageView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Tezkor ingiliz tili A2',
-              style: TextStyle(
+              'courses.quick_english_a2'.tr(),
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
                 color: AppColor.white,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
-              'Ingiliz tilida yuqori marralarni egallang!',
+              'courses.achieve_high_levels'.tr(),
               textAlign: TextAlign.center,
 
               maxLines: 2,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 color: AppColor.white,
               ),
             ),
-            SizedBox(height: 16),
-            ElevatedButton(onPressed: () {}, child: Text('Boshlash')),
+            const SizedBox(height: 16),
+            ElevatedButton(onPressed: () {}, child: Text('common.start'.tr())),
           ],
         ),
       ),

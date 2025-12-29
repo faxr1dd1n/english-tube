@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_icons.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
 import 'package:en_tube/src/ui/menu/learn/items/learn_widget.dart';
@@ -19,7 +20,7 @@ class _LearnScreenState extends State<LearnScreen> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: 'Lessons'),
+        child: AppBarWidget(title: 'learn.title'.tr()),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
@@ -43,8 +44,8 @@ class _LearnScreenState extends State<LearnScreen> {
             },
             child: LearnWidget(
               icon: AppIcons.bookA,
-              title: 'Reading',
-              description: 'Brief description of the lesson goes here.',
+              title: 'learn.reading'.tr(),
+              description: 'learn.lesson_description'.tr(),
             ),
           ),
           GestureDetector(
@@ -66,8 +67,8 @@ class _LearnScreenState extends State<LearnScreen> {
             },
             child: LearnWidget(
               icon: AppIcons.notebookPen,
-              title: 'Check your grammar',
-              description: 'Brief description of the lesson goes here.',
+              title: 'learn.grammar'.tr(),
+              description: 'learn.lesson_description'.tr(),
             ),
           ),
           GestureDetector(
@@ -89,8 +90,8 @@ class _LearnScreenState extends State<LearnScreen> {
             },
             child: LearnWidget(
               icon: AppIcons.podcast,
-              title: 'Podcasts',
-              description: 'Brief description of the lesson goes here.',
+              title: 'learn.podcasts'.tr(),
+              description: 'learn.lesson_description'.tr(),
             ),
           ),
           GestureDetector(
@@ -112,8 +113,8 @@ class _LearnScreenState extends State<LearnScreen> {
             },
             child: LearnWidget(
               icon: AppIcons.languages,
-              title: 'Traslator',
-              description: 'Brief description of the lesson goes here.',
+              title: 'learn.translator'.tr(),
+              description: 'learn.lesson_description'.tr(),
             ),
           ),
         ],

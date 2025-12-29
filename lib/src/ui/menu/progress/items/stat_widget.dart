@@ -18,18 +18,19 @@ class StatWidget extends StatelessWidget {
         ),
         // color: AppColor.gray700,
       ),
+      height: 150,
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      height: 140,
       // width: MediaQuery.of(context).size.width * 0.4,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             title,
             textAlign: TextAlign.center,
 
             style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
               color: AppColor.white,
             ),
           ),
@@ -37,8 +38,8 @@ class StatWidget extends StatelessWidget {
           Text(
             content,
             style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
               color: AppColor.white,
             ),
           ),

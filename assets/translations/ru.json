@@ -1,4 +1,116 @@
 {
   "language": "Язык",
-  "select_language": "Выберите язык"
+  "select_language": "Выберите язык",
+
+  "auth": {
+    "welcome_back": "Добро пожаловать",
+    "create_account": "Создать аккаунт",
+    "sign_up_subtitle": "Зарегистрируйтесь для начала",
+    "email": "Email",
+    "password": "Пароль",
+    "confirm_password": "Подтвердите пароль",
+    "full_name": "Полное имя",
+    "login": "Войти",
+    "sign_up": "Регистрация",
+    "dont_have_account": "Нет аккаунта?",
+    "already_have_account": "Уже есть аккаунт?",
+    "enter_email": "Введите email",
+    "enter_password": "Введите пароль",
+    "enter_name": "Введите ваше имя",
+    "enter_valid_email": "Введите корректный email",
+    "password_min_length": "Пароль должен содержать минимум 6 символов",
+    "confirm_password_hint": "Подтвердите пароль",
+    "passwords_dont_match": "Пароли не совпадают!",
+    "user_not_found": "Пользователь не найден!",
+    "wrong_password": "Неверный пароль!",
+    "invalid_email": "Неверный формат email!",
+    "account_deleted": "Этот аккаунт удален!",
+    "unknown_error": "Неизвестная ошибка",
+    "logout": "Выйти"
+  },
+
+  "home": {
+    "welcome": "Добро пожаловать {name}! 🤗",
+    "title": "Главная"
+  },
+
+  "navigation": {
+    "home": "Главная",
+    "mentors": "Менторы",
+    "learn": "Обучение",
+    "progress": "Прогресс",
+    "profile": "Профиль"
+  },
+
+  "profile": {
+    "title": "Профиль",
+    "user_information": "Информация о пользователе",
+    "name": "Имя",
+    "email": "Email",
+    "unknown": "Неизвестно",
+    "na": "Недоступно",
+    "no_email": "Нет email"
+  },
+
+  "mentors": {
+    "title": "Менторы",
+    "videos_count": "{count} видео",
+    "videos": "Видео",
+    "video_player": "Видео плеер"
+  },
+
+  "learn": {
+    "title": "Уроки",
+    "reading": "Чтение",
+    "grammar": "Проверьте свою грамматику",
+    "podcasts": "Подкасты",
+    "translator": "Переводчик",
+    "lesson_description": "Краткое описание урока."
+  },
+
+  "progress": {
+    "title": "Прогресс",
+    "watched_hours": "Просмотренные часы уроков",
+    "watched_lessons": "Количество просмотренных уроков",
+    "hours_value": "12+ часов",
+    "lessons_value": "2 урока",
+    "weekly": "Недельный",
+    "daily": "Дневной",
+    "hours": "Часы",
+    "avg": "средн",
+    "monday": "Пн",
+    "tuesday": "Вт",
+    "wednesday": "Ср",
+    "thursday": "Чт",
+    "friday": "Пт",
+    "saturday": "Сб",
+    "sunday": "Вс"
+  },
+
+  "drawer": {
+    "menu": "Меню",
+    "home": "Главная",
+    "settings": "Настройки"
+  },
+
+  "common": {
+    "error": "Ошибка: {message}",
+    "press_again_to_exit": "Нажмите еще раз для выхода",
+    "search": "Поиск...",
+    "new_courses": "Новые курсы",
+    "view_all": "Показать все",
+    "start": "Начать"
+  },
+
+  "skills": {
+    "translate": "Перевод",
+    "listening": "Аудирование",
+    "reading": "Чтение",
+    "speaking": "Говорение"
+  },
+
+  "courses": {
+    "quick_english_a2": "Быстрый английский A2",
+    "achieve_high_levels": "Достигните высоких уровней в английском!"
+  }
 }

@@ -10,6 +10,7 @@ import 'package:en_tube/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -22,6 +23,11 @@ void main() async {
   // App ochilishida user name ni yuklab saqlash
   await RunAppServices.loadAndSaveUserName();
 
+  // Saqlangan tilni yuklash
+  final prefs = await SharedPreferences.getInstance();
+  final savedLanguageCode = prefs.getString('language_code') ?? 'uz';
+  final savedLocale = Locale(savedLanguageCode);
+
   final isFirstOpenApp = await RunAppServices.getIsFirstOpenApp();
   runApp(
     ChangeNotifierProvider(
@@ -29,6 +35,7 @@ void main() async {
       child: EasyLocalization(
         supportedLocales: const [Locale('uz'), Locale('en'), Locale('ru')],
         path: 'assets/translations',
+        startLocale: savedLocale, // Saqlangan tildan boshlash
         fallbackLocale: const Locale('uz'),
         saveLocale: false, // Provider orqali saqlaymiz
         child: MyApp(isFirstOpenApp: isFirstOpenApp),

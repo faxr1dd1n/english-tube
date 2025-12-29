@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/story_model.dart';
+import 'package:en_tube/src/widgets/custom_cachedd_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_instagram_storyboard/flutter_instagram_storyboard.dart';
 
@@ -66,40 +67,32 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
             )
           : const SizedBox.shrink(),
       body: Stack(
-  children: [
-    Positioned.fill(
-      child: CachedNetworkImage(
-        imageUrl: pageData.imageUrl,
-        fit: BoxFit.contain,
-        alignment: Alignment.center,
-        placeholder: (context, url) => const Center(
-          child: CircularProgressIndicator(color: Colors.white),
-        ),
-        errorWidget: (context, url, error) => const Center(
-          child: Icon(Icons.error, color: Colors.white, size: 50),
-        ),
-      ),
-    ),
+        children: [
+          Positioned.fill(
+            child: CustomCachedImage(
+              imageUrl: pageData.imageUrl,
+              fit: BoxFit.contain,
+            ),
+          ),
 
-    // Text overlay
-    Positioned(
-      bottom: 20,
-      left: 20,
-      right: 20,
-      child: Text(
-        pageData.text,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
-        ),
+          // Text overlay
+          Positioned(
+            bottom: 20,
+            left: 20,
+            right: 20,
+            child: Text(
+              pageData.text,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
       ),
-    ),
-  ],
-),
-
     );
   }
 
@@ -114,7 +107,7 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
           Text(
             text,
             maxLines: 2,
-                overflow: TextOverflow.ellipsis,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: AppColor.white,
               fontWeight: FontWeight.bold,
@@ -132,9 +125,9 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
       color: AppColor.white,
       borderRadius: BorderRadius.circular(_borderRadius - 3),
       image: DecorationImage(
-  image: CachedNetworkImageProvider(imageUrl),
-  fit: BoxFit.cover,
-)
+        image: CachedNetworkImageProvider(imageUrl),
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -168,7 +161,6 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
       pageTransform: const StoryPage3DTransform(),
       buttonDatas: widget.stories.map((story) {
         return StoryButtonData(
-          
           storyId: story.id,
           storyController: storyController,
           timelineBackgroundColor: story.timelineColor ?? Colors.blue,
@@ -177,7 +169,9 @@ class _HomeStoryWidgetState extends State<HomeStoryWidget> {
             story.borderColor ?? const Color.fromARGB(255, 134, 119, 95),
           ),
           child: _buildButtonChild(story.title),
-          storyPages: story.pages.map((page) => _createStoryPage(page)).toList(),
+          storyPages: story.pages
+              .map((page) => _createStoryPage(page))
+              .toList(),
           segmentDuration: story.pages
               .map((_) => const Duration(seconds: 25))
               .toList(),

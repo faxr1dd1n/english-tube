@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/constraints/app_images.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
@@ -65,15 +66,15 @@ class _MentorWidgetState extends State<MentorWidget> {
                 SizedBox(height: 8),
                 Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.play_circle_outline_rounded,
                       size: 18,
                       color: Colors.grey,
                     ),
-                    SizedBox(width: 4),
+                    const SizedBox(width: 4),
                     Text(
-                      '${widget.mentorModel.videos.length} videos',
-                      style: TextStyle(color: Colors.grey),
+                      'mentors.videos_count'.tr(namedArgs: {'count': widget.mentorModel.videos.length.toString()}),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),

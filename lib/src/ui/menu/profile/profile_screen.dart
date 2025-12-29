@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/login_screen.dart';
 import 'package:en_tube/src/widgets/app_bar_widget.dart';
+import 'package:en_tube/src/widgets/custom_cachedd_image.dart';
 import 'package:en_tube/src/widgets/language_selector_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(e.message ?? 'Aniqlamagan xatolik'),
+          content: Text(e.message ?? 'auth.unknown_error'.tr()),
           backgroundColor: Colors.red,
         ),
       );
@@ -89,14 +91,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: 'Profile'),
+        child: AppBarWidget(title: 'profile.title'.tr()),
       ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -105,22 +106,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             const SizedBox(height: 20),
 
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.purple, Colors.blue],
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
-                ),
-                shape: BoxShape.circle,
-              ),
-              child: ClipOval(
-                child: Image.network(
-                  "https://thumbs.dreamstime.com/b/d-icon-avatar-student-man-reading-book-school-concept-education-learning-isolated-transparent-png-background-cartoon-352289965.jpg",
-                  fit: BoxFit.cover,
-                ),
+            CircleAvatar(
+              radius: 50,
+
+              child: CustomCachedImage(
+                borderRadius: BorderRadius.circular(50),
+                fit: BoxFit.fill,
+                imageUrl:
+                    "https://thumbs.dreamstime.com/b/d-icon-avatar-student-man-reading-book-school-concept-education-learning-isolated-transparent-png-background-cartoon-352289965.jpg",
               ),
             ),
 
@@ -141,9 +134,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "User Information",
-                    style: TextStyle(
+                  Text(
+                    'profile.user_information'.tr(),
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -153,15 +146,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   // Display Name
                   _buildInfoRow(
-                    "Name",
-                    authService.value.currentUser?.displayName ?? "Unknown",
+                    'profile.name'.tr(),
+                    authService.value.currentUser?.displayName ?? 'profile.unknown'.tr(),
                   ),
                   const SizedBox(height: 15),
 
                   // Email
                   _buildInfoRow(
-                    "Email",
-                    authService.value.currentUser?.email ?? "N/A",
+                    'profile.email'.tr(),
+                    authService.value.currentUser?.email ?? 'profile.na'.tr(),
                   ),
                   const SizedBox(height: 15),
                 ],
@@ -184,19 +177,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: GestureDetector(
                   onTap: () => logout(context),
                   child: Container(
-                   
-                  decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.1),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.2),
-                    width: 1,
-                  ),
-                                  ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.2),
+                        width: 1,
+                      ),
+                    ),
                     child: Center(
-                      child: const Text(
-                        "Logout",
-                        style: TextStyle(
+                      child: Text(
+                        'auth.logout'.tr(),
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.bold,

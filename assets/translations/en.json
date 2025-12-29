@@ -1,5 +1,116 @@
-
 {
   "language": "Language",
-  "select_language": "Select Language"
+  "select_language": "Select Language",
+
+  "auth": {
+    "welcome_back": "Welcome Back",
+    "create_account": "Create Account",
+    "sign_up_subtitle": "Sign up to get started",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "full_name": "Full Name",
+    "login": "Login",
+    "sign_up": "Sign Up",
+    "dont_have_account": "Don't have an account?",
+    "already_have_account": "Already have an account?",
+    "enter_email": "Enter email",
+    "enter_password": "Enter password",
+    "enter_name": "Enter your name",
+    "enter_valid_email": "Enter valid email",
+    "password_min_length": "Password must be at least 6 characters",
+    "confirm_password_hint": "Confirm password",
+    "passwords_dont_match": "Passwords don't match!",
+    "user_not_found": "User not found!",
+    "wrong_password": "Wrong password!",
+    "invalid_email": "Invalid email format!",
+    "account_deleted": "This account is deleted!",
+    "unknown_error": "Unknown error",
+    "logout": "Logout"
+  },
+
+  "home": {
+    "welcome": "Welcome {name}! 🤗",
+    "title": "Home"
+  },
+
+  "navigation": {
+    "home": "Home",
+    "mentors": "Mentors",
+    "learn": "Learn",
+    "progress": "Progress",
+    "profile": "Profile"
+  },
+
+  "profile": {
+    "title": "Profile",
+    "user_information": "User Information",
+    "name": "Name",
+    "email": "Email",
+    "unknown": "Unknown",
+    "na": "N/A",
+    "no_email": "No email"
+  },
+
+  "mentors": {
+    "title": "Mentors",
+    "videos_count": "{count} videos",
+    "videos": "Videos",
+    "video_player": "Video Player"
+  },
+
+  "learn": {
+    "title": "Lessons",
+    "reading": "Reading",
+    "grammar": "Check your grammar",
+    "podcasts": "Podcasts",
+    "translator": "Translator",
+    "lesson_description": "Brief description of the lesson goes here."
+  },
+
+  "progress": {
+    "title": "Progress",
+    "watched_hours": "Watched lesson hours",
+    "watched_lessons": "Number of watched lessons",
+    "hours_value": "12+ hours",
+    "lessons_value": "2 lessons",
+    "weekly": "Weekly",
+    "daily": "Daily",
+    "hours": "Hours",
+    "avg": "avg",
+    "monday": "Mon",
+    "tuesday": "Tue",
+    "wednesday": "Wed",
+    "thursday": "Thu",
+    "friday": "Fri",
+    "saturday": "Sat",
+    "sunday": "Sun"
+  },
+
+  "drawer": {
+    "menu": "Menu",
+    "home": "Home",
+    "settings": "Settings"
+  },
+
+  "common": {
+    "error": "Error: {message}",
+    "press_again_to_exit": "Press again to exit",
+    "search": "Search...",
+    "new_courses": "New Courses",
+    "view_all": "View All",
+    "start": "Start"
+  },
+
+  "skills": {
+    "translate": "Translate",
+    "listening": "Listening",
+    "reading": "Reading",
+    "speaking": "Speaking"
+  },
+
+  "courses": {
+    "quick_english_a2": "Quick English A2",
+    "achieve_high_levels": "Achieve high levels in English!"
+  }
 }

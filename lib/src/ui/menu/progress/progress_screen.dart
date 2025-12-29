@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/ui/menu/progress/line_chart_sample.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_barchart_widget.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_type_widget.dart';
@@ -19,7 +20,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: 'Progress'),
+        child: AppBarWidget(title: 'progress.title'.tr()),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -41,15 +42,15 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 children: [
                   Expanded(
                     child: StatWidget(
-                      title: 'Ko\'rilgan dars soati',
-                      content: '12+ soat',
+                      title: 'progress.watched_hours'.tr(),
+                      content: 'progress.hours_value'.tr(),
                     ),
                   ),
                   SizedBox(width: 10),
                   Expanded(
                     child: StatWidget(
-                      title: 'Ko\'rilgan darslar soni',
-                      content: '2 dars',
+                      title: 'progress.watched_lessons'.tr(),
+                      content: 'progress.lessons_value'.tr(),
                     ),
                   ),
                 ],

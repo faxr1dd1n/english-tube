@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/signup_screen.dart';
@@ -42,16 +43,16 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() => isLoading = false);
 
       if (mounted) {
-        String errorMessage = 'Aniqlamagan xatolik';
+        String errorMessage = 'auth.unknown_error'.tr();
 
         if (e.code == 'user-not-found') {
-          errorMessage = 'Foydalanuvchi topilmadi!';
+          errorMessage = 'auth.user_not_found'.tr();
         } else if (e.code == 'wrong-password') {
-          errorMessage = 'Parol noto\'g\'ri!';
+          errorMessage = 'auth.wrong_password'.tr();
         } else if (e.code == 'invalid-email') {
-          errorMessage = 'Email noto\'g\'ri formatda!';
+          errorMessage = 'auth.invalid_email'.tr();
         } else if (e.code == 'user-disabled') {
-          errorMessage = 'Bu akkaunt o\'chirilgan!';
+          errorMessage = 'auth.account_deleted'.tr();
         } else if (e.message != null) {
           errorMessage = e.message!;
         }
@@ -79,9 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                "Welcome Back",
-                style: TextStyle(
+              Text(
+                'auth.welcome_back'.tr(),
+                style: const TextStyle(
                   color: AppColor.white,
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
@@ -94,22 +95,23 @@ class _LoginScreenState extends State<LoginScreen> {
                 style: TextStyle(color: AppColor.white),
                 cursorColor: AppColor.white,
                 controller: email,
-      
+
                 decoration: InputDecoration(
-                  labelText: "Email",
-                  labelStyle: TextStyle(color: AppColor.white),
-                  focusedBorder: OutlineInputBorder(
+                  filled: false,
+                  labelText: 'auth.email'.tr(),
+                  labelStyle: const TextStyle(color: AppColor.white),
+                  focusedBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
-      
+
                     borderSide: BorderSide(color: AppColor.white),
                   ),
-      
-                  border: OutlineInputBorder(
+
+                  border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
                 ),
                 validator: (v) {
-                  if (v!.isEmpty) return "Email kiriting";
+                  if (v!.isEmpty) return 'auth.enter_email'.tr();
                   return null;
                 },
               ),
@@ -123,6 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: password,
                 obscureText:isObscured? true:false,
                 decoration: InputDecoration(
+                  filled: false,
                   suffixIcon: GestureDetector(
                     onTap: () {
                       setState(() {
@@ -134,20 +137,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: AppColor.white,
                     ),
                   ),
-                  labelText: "Password",
-                  labelStyle: TextStyle(color: AppColor.white),
+                  labelText: 'auth.password'.tr(),
+                  labelStyle: const TextStyle(color: AppColor.white),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
-      
+
                     borderSide: BorderSide(color: AppColor.white),
                   ),
-      
+
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                   ),
                 ),
                 validator: (v) {
-                  if (v!.isEmpty) return "Parol kiriting";
+                  if (v!.isEmpty) return 'auth.enter_password'.tr();
                   return null;
                 },
               ),
@@ -178,9 +181,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 valueColor:
                                     AlwaysStoppedAnimation<Color>(AppColor.generalColor),
                             )
-                            : const Text(
-                                "Login",
-                                style: TextStyle(
+                            : Text(
+                                'auth.login'.tr(),
+                                style: const TextStyle(
                                   color: AppColor.generalColor,
                                   fontSize: 18,
                                 ),
@@ -197,9 +200,9 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    "Don't have an account? ",
-                    style: TextStyle(
+                  Text(
+                    '${'auth.dont_have_account'.tr()} ',
+                    style: const TextStyle(
                       color: AppColor.white,
                       fontSize: 14,
                     ),
@@ -211,9 +214,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         MaterialPageRoute(builder: (_) => const SignUpScreen()),
                       );
                     },
-                    child: const Text(
-                      "Sign Up",
-                      style: TextStyle(
+                    child: Text(
+                      'auth.sign_up'.tr(),
+                      style: const TextStyle(
                         color: AppColor.white,
                         fontSize: 14,
                         fontWeight: FontWeight.bold,

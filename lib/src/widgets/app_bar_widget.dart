@@ -6,11 +6,13 @@ class AppBarWidget extends StatelessWidget {
     required this.title,
     this.backgroundColor,
     this.isCenterTitle,
+    this.textStyle,
     super.key,
   });
   final String title;
   final Color? backgroundColor;
   final bool? isCenterTitle;
+  final TextStyle? textStyle;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -26,7 +28,9 @@ class AppBarWidget extends StatelessWidget {
       ).withValues(alpha: 0.2),
       title: Text(
         title,
-        style: TextStyle(color: AppColor.white, fontWeight: FontWeight.bold),
+        style:
+            textStyle ??
+            TextStyle(color: AppColor.white, fontWeight: FontWeight.bold),
       ),
     );
   }

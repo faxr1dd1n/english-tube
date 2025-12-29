@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/bloc/mentor/mentor_bloc.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
@@ -48,7 +49,7 @@ class _VideoPageState extends State<VideoPage> {
           backgroundColor: AppColor.generalColor,
           appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: 'Video Player'),
+        child: AppBarWidget(title: 'mentors.video_player'.tr()),
       ),
           
         

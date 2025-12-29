@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/home_widget_model.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,21 @@ class HomeWidgetsGridVieew extends StatelessWidget {
   const HomeWidgetsGridVieew({required this.widgetModel, super.key});
 
   final List<HomeWidgetModel> widgetModel;
+
+  String _getTranslatedTitle(String imageUrl) {
+    switch (imageUrl.toLowerCase()) {
+      case 'translate':
+        return 'skills.translate'.tr();
+      case 'listening':
+        return 'skills.listening'.tr();
+      case 'reading':
+        return 'skills.reading'.tr();
+      case 'speaking':
+        return 'skills.speaking'.tr();
+      default:
+        return imageUrl;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +67,10 @@ class HomeWidgetsGridVieew extends StatelessWidget {
                   color: AppColor.white,
                   size: 35,
                 ),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
                 Text(
-                  widgetModel[index].title,
-                  style: TextStyle(
+                  _getTranslatedTitle(widgetModel[index].imageUrl),
+                  style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
                     color: AppColor.white,

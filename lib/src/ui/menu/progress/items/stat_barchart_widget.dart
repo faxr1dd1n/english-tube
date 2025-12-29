@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -18,13 +19,13 @@ class _StatBarchartWidgetState extends State<StatBarchartWidget> {
     super.initState();
 
     data = [
-      _ChartData('Dush', 1),
-      _ChartData('Sesh', 2),
-      _ChartData('Chor', 2),
-      _ChartData('Pay', 4),
-      _ChartData('Juma', 5.5),
-      _ChartData('Shan', 2.3),
-      _ChartData('Yak', 4),
+      _ChartData('progress.monday'.tr(), 1),
+      _ChartData('progress.tuesday'.tr(), 2),
+      _ChartData('progress.wednesday'.tr(), 2),
+      _ChartData('progress.thursday'.tr(), 4),
+      _ChartData('progress.friday'.tr(), 5.5),
+      _ChartData('progress.saturday'.tr(), 2.3),
+      _ChartData('progress.sunday'.tr(), 4),
     ];
     _tooltip = TooltipBehavior(enable: true);
   }
@@ -51,8 +52,8 @@ class _StatBarchartWidgetState extends State<StatBarchartWidget> {
           dataSource: data,
           xValueMapper: (_ChartData data, _) => data.x,
           yValueMapper: (_ChartData data, _) => data.y,
-          name: 'Soat',
-          color: Color.fromRGBO(239, 158, 19, 1),
+          name: 'progress.hours'.tr(),
+          color: const Color.fromRGBO(239, 158, 19, 1),
         ),
       ],
     );

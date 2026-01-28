@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:flutter/material.dart';
 
 class AppSearchWidget extends StatefulWidget {
@@ -28,7 +28,7 @@ class _AppSearchWidgetState extends State<AppSearchWidget> {
       ),
       child: TextField(
         decoration: InputDecoration(
-          hintText: 'common.search'.tr(),
+          hintText: translate('common.search'),
           border: InputBorder.none,
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,

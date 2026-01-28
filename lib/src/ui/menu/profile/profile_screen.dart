@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/login_screen.dart';
 import 'package:en_tube/src/widgets/app_bar_widget.dart';
@@ -54,7 +54,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(e.message ?? 'auth.unknown_error'.tr()),
+          content: Text(e.message ?? translate('auth.unknown_error')),
           backgroundColor: Colors.red,
         ),
       );
@@ -97,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: 'profile.title'.tr()),
+        child: AppBarWidget(title: translate('profile.title')),
       ),
       body: Align(
         alignment: Alignment.topCenter,
@@ -135,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'profile.user_information'.tr(),
+                    translate('profile.user_information'),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -146,15 +146,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                   // Display Name
                   _buildInfoRow(
-                    'profile.name'.tr(),
-                    authService.value.currentUser?.displayName ?? 'profile.unknown'.tr(),
+                    translate('profile.name'),
+                    authService.value.currentUser?.displayName ??
+                        translate('profile.unknown'),
                   ),
                   const SizedBox(height: 15),
 
                   // Email
                   _buildInfoRow(
-                    'profile.email'.tr(),
-                    authService.value.currentUser?.email ?? 'profile.na'.tr(),
+                    translate('profile.email'),
+                    authService.value.currentUser?.email ??
+                        translate('profile.na'),
                   ),
                   const SizedBox(height: 15),
                 ],
@@ -187,7 +189,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        'auth.logout'.tr(),
+                        translate('auth.logout'),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,

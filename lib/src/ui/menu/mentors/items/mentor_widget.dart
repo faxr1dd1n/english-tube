@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/constraints/app_images.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
@@ -73,7 +73,7 @@ class _MentorWidgetState extends State<MentorWidget> {
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      'mentors.videos_count'.tr(namedArgs: {'count': widget.mentorModel.videos.length.toString()}),
+                      translate('mentors.videos_count', args: {'count': widget.mentorModel.videos.length.toString()}),
                       style: const TextStyle(color: Colors.grey),
                     ),
                   ],

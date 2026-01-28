@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +43,7 @@ class _StatTypeWidgetState extends State<StatTypeWidget> {
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Center(
                       child: Text(
-                        'progress.weekly'.tr(),
+                        translate('progress.weekly'),
                         style: const TextStyle(
                           fontSize: 12,
                           color: AppColor.white,
@@ -55,7 +55,7 @@ class _StatTypeWidgetState extends State<StatTypeWidget> {
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Text(
-                      'progress.weekly'.tr(),
+                      translate('progress.weekly'),
                       style: const TextStyle(
                         fontSize: 12,
                         color: AppColor.white,
@@ -83,7 +83,7 @@ class _StatTypeWidgetState extends State<StatTypeWidget> {
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Center(
                       child: Text(
-                        'progress.daily'.tr(),
+                        translate('progress.daily'),
                         style: const TextStyle(
                           fontSize: 12,
                           color: AppColor.white,
@@ -95,7 +95,7 @@ class _StatTypeWidgetState extends State<StatTypeWidget> {
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Text(
-                      'progress.daily'.tr(),
+                      translate('progress.daily'),
                       style: const TextStyle(
                         fontSize: 12,
                         color: AppColor.white,

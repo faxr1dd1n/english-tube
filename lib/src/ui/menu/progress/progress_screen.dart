@@ -1,4 +1,7 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:en_tube/src/ui/menu/progress/pages/progress_users_ranking.dart';
+import 'package:en_tube/src/widgets/title_widget.dart';
+import 'package:en_tube/theme/app_colors.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:en_tube/src/ui/menu/progress/line_chart_sample.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_barchart_widget.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_type_widget.dart';
@@ -20,7 +23,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: 'progress.title'.tr()),
+        child: AppBarWidget(title: translate('progress.title')),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -33,7 +36,97 @@ class _ProgressScreenState extends State<ProgressScreen> {
               StatTypeWidget(),
               SizedBox(height: 10),
               LineChartSample(),
+              SizedBox(height: 20),
+              TitleWidget(
+                titleText: 'Users ranking',
+                buttonText: 'See all',
 
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return ProgressUsersRanking();
+                      },
+                    ),
+                  );
+                },
+              ),
+              Stack(
+                children: [
+                  SizedBox(
+                    height: 150,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        return SizedBox(
+                          height: 40,
+                          child: ListTile(
+                            contentPadding: EdgeInsets.only(right: 8, left: 8),
+                            trailing: Text(
+                              ((100 + index) / (1 + index)).toInt().toString(),
+                              style: TextStyle(
+                                color: AppColors.textOnPrimary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            leading: CircleAvatar(
+                              radius: 15,
+                              backgroundColor: Colors.blue,
+                              child: Text(
+                                (index + 1).toString(),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: AppColors.textOnPrimary,
+                                ),
+                              ),
+                            ),
+                            title: Text(
+                              'User name',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.textOnPrimary,
+                              ),
+                            ),
+                            subtitle: Text(
+                              'Subtitle',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.textOnPrimary,
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: IgnorePointer(
+                      child: Container(
+                        height: 20,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.darkBackground.withOpacity(0.99),
+                              blurRadius: 25,
+                              spreadRadius: 12,
+                              offset: Offset(0, -6),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 10),
+              // ProgressUsersRanking(),
               SizedBox(height: 20),
               StatBarchartWidget(),
               SizedBox(height: 20),
@@ -42,15 +135,15 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 children: [
                   Expanded(
                     child: StatWidget(
-                      title: 'progress.watched_hours'.tr(),
-                      content: 'progress.hours_value'.tr(),
+                      title: translate('progress.watched_hours'),
+                      content: translate('progress.hours_value'),
                     ),
                   ),
                   SizedBox(width: 10),
                   Expanded(
                     child: StatWidget(
-                      title: 'progress.watched_lessons'.tr(),
-                      content: 'progress.lessons_value'.tr(),
+                      title: translate('progress.watched_lessons'),
+                      content: translate('progress.lessons_value'),
                     ),
                   ),
                 ],

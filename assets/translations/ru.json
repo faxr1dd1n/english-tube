@@ -1,7 +1,6 @@
 {
   "language": "Язык",
   "select_language": "Выберите язык",
-
   "auth": {
     "welcome_back": "Добро пожаловать",
     "create_account": "Создать аккаунт",
@@ -28,12 +27,10 @@
     "unknown_error": "Неизвестная ошибка",
     "logout": "Выйти"
   },
-
   "home": {
     "welcome": "Добро пожаловать {name}! 🤗",
     "title": "Главная"
   },
-
   "navigation": {
     "home": "Главная",
     "mentors": "Менторы",
@@ -41,7 +38,6 @@
     "progress": "Прогресс",
     "profile": "Профиль"
   },
-
   "profile": {
     "title": "Профиль",
     "user_information": "Информация о пользователе",
@@ -51,14 +47,12 @@
     "na": "Недоступно",
     "no_email": "Нет email"
   },
-
   "mentors": {
     "title": "Менторы",
     "videos_count": "{count} видео",
     "videos": "Видео",
     "video_player": "Видео плеер"
   },
-
   "learn": {
     "title": "Уроки",
     "reading": "Чтение",
@@ -67,7 +61,6 @@
     "translator": "Переводчик",
     "lesson_description": "Краткое описание урока."
   },
-
   "progress": {
     "title": "Прогресс",
     "watched_hours": "Просмотренные часы уроков",
@@ -86,13 +79,11 @@
     "saturday": "Сб",
     "sunday": "Вс"
   },
-
   "drawer": {
     "menu": "Меню",
     "home": "Главная",
     "settings": "Настройки"
   },
-
   "common": {
     "error": "Ошибка: {message}",
     "press_again_to_exit": "Нажмите еще раз для выхода",
@@ -101,16 +92,15 @@
     "view_all": "Показать все",
     "start": "Начать"
   },
-
   "skills": {
     "translate": "Перевод",
     "listening": "Аудирование",
     "reading": "Чтение",
     "speaking": "Говорение"
   },
-
   "courses": {
     "quick_english_a2": "Быстрый английский A2",
     "achieve_high_levels": "Достигните высоких уровней в английском!"
-  }
+  },
+  "lessons": "Уроки"
 }

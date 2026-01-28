@@ -2,7 +2,7 @@ import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:flutter/material.dart';
 
 class StatWidget extends StatelessWidget {
-  const StatWidget({required this.title,required this.content,super.key});
+  const StatWidget({required this.title, required this.content, super.key});
   final String title;
   final String content;
 

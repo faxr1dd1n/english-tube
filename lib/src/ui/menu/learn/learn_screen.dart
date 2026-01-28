@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:en_tube/src/constraints/app_icons.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
 import 'package:en_tube/src/ui/menu/learn/items/learn_widget.dart';
@@ -20,7 +20,7 @@ class _LearnScreenState extends State<LearnScreen> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: 'learn.title'.tr()),
+        child: AppBarWidget(title: translate('learn.title')),
       ),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
@@ -44,8 +44,8 @@ class _LearnScreenState extends State<LearnScreen> {
             },
             child: LearnWidget(
               icon: AppIcons.bookA,
-              title: 'learn.reading'.tr(),
-              description: 'learn.lesson_description'.tr(),
+              title: translate('learn.reading'),
+              description: translate('learn.lesson_description'),
             ),
           ),
           GestureDetector(
@@ -67,8 +67,8 @@ class _LearnScreenState extends State<LearnScreen> {
             },
             child: LearnWidget(
               icon: AppIcons.notebookPen,
-              title: 'learn.grammar'.tr(),
-              description: 'learn.lesson_description'.tr(),
+              title: translate('learn.grammar'),
+              description: translate('learn.lesson_description'),
             ),
           ),
           GestureDetector(
@@ -90,8 +90,8 @@ class _LearnScreenState extends State<LearnScreen> {
             },
             child: LearnWidget(
               icon: AppIcons.podcast,
-              title: 'learn.podcasts'.tr(),
-              description: 'learn.lesson_description'.tr(),
+              title: translate('learn.podcasts'),
+              description: translate('learn.lesson_description'),
             ),
           ),
           GestureDetector(
@@ -113,8 +113,8 @@ class _LearnScreenState extends State<LearnScreen> {
             },
             child: LearnWidget(
               icon: AppIcons.languages,
-              title: 'learn.translator'.tr(),
-              description: 'learn.lesson_description'.tr(),
+              title: translate('learn.translator'),
+              description: translate('learn.lesson_description'),
             ),
           ),
         ],

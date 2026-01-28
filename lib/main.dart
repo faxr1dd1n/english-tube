@@ -1,4 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_translate/flutter_translate.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/providers/locale_provider.dart';
 import 'package:en_tube/src/service/firebase_auth_service.dart';
@@ -18,7 +19,6 @@ void main() async {
 
   // Firebase initialization
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await EasyLocalization.ensureInitialized();
 
   // App ochilishida user name ni yuklab saqlash
   await RunAppServices.loadAndSaveUserName();
@@ -26,20 +26,19 @@ void main() async {
   // Saqlangan tilni yuklash
   final prefs = await SharedPreferences.getInstance();
   final savedLanguageCode = prefs.getString('language_code') ?? 'uz';
-  final savedLocale = Locale(savedLanguageCode);
+
+  // flutter_translate delegate yaratish
+  var delegate = await LocalizationDelegate.create(
+    fallbackLocale: savedLanguageCode,
+    supportedLocales: ['uz', 'en', 'ru'],
+    basePath: 'assets/translations/',
+  );
 
   final isFirstOpenApp = await RunAppServices.getIsFirstOpenApp();
   runApp(
     ChangeNotifierProvider(
       create: (_) => LocaleProvider(),
-      child: EasyLocalization(
-        supportedLocales: const [Locale('uz'), Locale('en'), Locale('ru')],
-        path: 'assets/translations',
-        startLocale: savedLocale, // Saqlangan tildan boshlash
-        fallbackLocale: const Locale('uz'),
-        saveLocale: false, // Provider orqali saqlaymiz
-        child: MyApp(isFirstOpenApp: isFirstOpenApp),
-      ),
+      child: LocalizedApp(delegate, MyApp(isFirstOpenApp: isFirstOpenApp)),
     ),
   );
 }
@@ -49,6 +48,8 @@ class MyApp extends StatelessWidget {
   final bool isFirstOpenApp;
   @override
   Widget build(BuildContext context) {
+    var localizationDelegate = LocalizedApp.of(context).delegate;
+
     return Consumer<LocaleProvider>(
       builder: (context, localeProvider, _) {
         return MaterialApp(
@@ -56,8 +57,13 @@ class MyApp extends StatelessWidget {
           // darkTheme: AppTheme.lightTheme,
           themeMode: ThemeMode.system,
           locale: localeProvider.locale,
-          supportedLocales: context.supportedLocales,
-          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: localizationDelegate.supportedLocales,
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            localizationDelegate,
+          ],
           debugShowCheckedModeBanner: false,
           home: ValueListenableBuilder(
             valueListenable: authService,

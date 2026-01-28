@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/login_screen.dart';
@@ -63,7 +63,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (passwordController.text != confirmPasswordController.text) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('auth.passwords_dont_match'.tr()),
+          content: Text(translate('auth.passwords_dont_match')),
           backgroundColor: Colors.red,
         ),
       );
@@ -99,7 +99,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(e.message ?? 'auth.unknown_error'.tr()),
+            content: Text(e.message ?? translate('auth.unknown_error')),
             backgroundColor: Colors.red,
           ),
         );
@@ -122,7 +122,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               children: [
                 const SizedBox(height: 40),
                 Text(
-                  'auth.create_account'.tr(),
+                  translate('auth.create_account'),
                   style: const TextStyle(
                     color: AppColor.white,
                     fontSize: 28,
@@ -131,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'auth.sign_up_subtitle'.tr(),
+                  translate('auth.sign_up_subtitle'),
                   style: const TextStyle(color: AppColor.white, fontSize: 16),
                 ),
                 const SizedBox(height: 30),
@@ -143,7 +143,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   controller: nameController,
                   decoration: InputDecoration(
                     filled: false,
-                    labelText: 'auth.full_name'.tr(),
+                    labelText: translate('auth.full_name'),
                     labelStyle: const TextStyle(color: AppColor.white),
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -154,7 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   validator: (v) {
-                    if (v!.isEmpty) return 'auth.enter_name'.tr();
+                    if (v!.isEmpty) return translate('auth.enter_name');
                     return null;
                   },
                 ),
@@ -169,7 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
                     filled: false,
-                    labelText: 'auth.email'.tr(),
+                    labelText: translate('auth.email'),
                     labelStyle: const TextStyle(color: AppColor.white),
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -180,8 +180,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   validator: (v) {
-                    if (v!.isEmpty) return 'auth.enter_email'.tr();
-                    if (!v.contains('@')) return 'auth.enter_valid_email'.tr();
+                    if (v!.isEmpty) return translate('auth.enter_email');
+                    if (!v.contains('@')) return translate('auth.enter_valid_email');
                     return null;
                   },
                 ),
@@ -207,7 +207,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: AppColor.white,
                       ),
                     ),
-                    labelText: 'auth.password'.tr(),
+                    labelText: translate('auth.password'),
                     labelStyle: const TextStyle(color: AppColor.white),
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -218,9 +218,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   validator: (v) {
-                    if (v!.isEmpty) return 'auth.enter_password'.tr();
+                    if (v!.isEmpty) return translate('auth.enter_password');
                     if (v.length < 6) {
-                      return 'auth.password_min_length'.tr();
+                      return translate('auth.password_min_length');
                     }
                     return null;
                   },
@@ -247,7 +247,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         color: AppColor.white,
                       ),
                     ),
-                    labelText: 'auth.confirm_password'.tr(),
+                    labelText: translate('auth.confirm_password'),
                     labelStyle: const TextStyle(color: AppColor.white),
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -258,7 +258,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                   validator: (v) {
-                    if (v!.isEmpty) return 'auth.confirm_password_hint'.tr();
+                    if (v!.isEmpty) return translate('auth.confirm_password_hint');
                     return null;
                   },
                 ),
@@ -288,7 +288,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   ),
                                 )
                               : Text(
-                                  'auth.sign_up'.tr(),
+                                  translate('auth.sign_up'),
                                   style: const TextStyle(
                                     color: AppColor.generalColor,
                                     fontSize: 18,
@@ -307,7 +307,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '${'auth.already_have_account'.tr()} ',
+                      '${translate('auth.already_have_account')} ',
                       style: const TextStyle(color: AppColor.white, fontSize: 14),
                     ),
                     GestureDetector(
@@ -320,7 +320,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         );
                       },
                       child: Text(
-                        'auth.login'.tr(),
+                        translate('auth.login'),
                         style: const TextStyle(
                           color: AppColor.white,
                           fontSize: 14,

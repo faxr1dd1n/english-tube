@@ -1,4 +1,5 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:en_tube/src/ui/menu/home/items/lessons/lessons_list_screen.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:en_tube/src/bloc/home/home_bloc.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/story_model.dart';
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: AppBarWidget(
-            title: 'home.welcome'.tr(namedArgs: {'name': userName}),
+            title: translate('home.welcome', args: {'name': userName}),
             textStyle: TextStyle(
               color: AppColor.white,
               fontSize: 16,
@@ -132,8 +133,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 170,
                       child: Center(
                         child: Text(
-                          'common.error'.tr(
-                            namedArgs: {'message': state.errorMessage},
+                          translate(
+                            'common.error',
+                            args: {'message': state.errorMessage},
                           ),
                           style: const TextStyle(color: Colors.white),
                         ),
@@ -225,8 +227,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 120,
                             child: Center(
                               child: Text(
-                                'common.error'.tr(
-                                  namedArgs: {'message': state.errorMessage},
+                                translate(
+                                  'common.error',
+                                  args: {'message': state.errorMessage},
                                 ),
                                 style: const TextStyle(color: Colors.white),
                               ),
@@ -241,16 +244,40 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
 
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: TitleWidget(),
+                      child: TitleWidget(
+                        titleText: translate('common.new_courses'),
+                        buttonText: translate('common.view_all'),
+                        onTap: () {
+                          Navigator.of(context, rootNavigator: true).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return LessonsListScreen();
+                              },
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 16),
                     const SizedBox(height: 200, child: LessonsPageView()),
                     const SizedBox(height: 20),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
-                      child: TitleWidget(),
+                      child: TitleWidget(
+                        titleText: translate('common.new_courses'),
+                        buttonText: translate('common.view_all'),
+                        onTap: () {
+                          Navigator.of(context, rootNavigator: true).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return LessonsListScreen();
+                              },
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 16),
                     const SizedBox(height: 200, child: LessonsPageView()),

@@ -1,17 +1,18 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:flutter/material.dart';
 
 class TitleWidget extends StatelessWidget {
-  const TitleWidget({super.key});
-
+  const TitleWidget({this.onTap, this.titleText, this.buttonText, super.key});
+  final Function()? onTap;
+  final String? titleText;
+  final String? buttonText;
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          'common.new_courses'.tr(),
+          titleText ?? '',
           style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
@@ -19,9 +20,9 @@ class TitleWidget extends StatelessWidget {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: onTap ?? () {},
           child: Text(
-            'common.view_all'.tr(),
+            buttonText ?? '',
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,

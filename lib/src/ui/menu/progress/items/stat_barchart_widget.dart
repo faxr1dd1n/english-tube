@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -19,13 +19,13 @@ class _StatBarchartWidgetState extends State<StatBarchartWidget> {
     super.initState();
 
     data = [
-      _ChartData('progress.monday'.tr(), 1),
-      _ChartData('progress.tuesday'.tr(), 2),
-      _ChartData('progress.wednesday'.tr(), 2),
-      _ChartData('progress.thursday'.tr(), 4),
-      _ChartData('progress.friday'.tr(), 5.5),
-      _ChartData('progress.saturday'.tr(), 2.3),
-      _ChartData('progress.sunday'.tr(), 4),
+      _ChartData(translate('progress.monday'), 1),
+      _ChartData(translate('progress.tuesday'), 2),
+      _ChartData(translate('progress.wednesday'), 2),
+      _ChartData(translate('progress.thursday'), 4),
+      _ChartData(translate('progress.friday'), 5.5),
+      _ChartData(translate('progress.saturday'), 2.3),
+      _ChartData(translate('progress.sunday'), 4),
     ];
     _tooltip = TooltipBehavior(enable: true);
   }
@@ -52,7 +52,7 @@ class _StatBarchartWidgetState extends State<StatBarchartWidget> {
           dataSource: data,
           xValueMapper: (_ChartData data, _) => data.x,
           yValueMapper: (_ChartData data, _) => data.y,
-          name: 'progress.hours'.tr(),
+          name: translate('progress.hours'),
           color: const Color.fromRGBO(239, 158, 19, 1),
         ),
       ],

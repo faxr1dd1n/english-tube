@@ -1,7 +1,6 @@
 {
   "language": "Til",
   "select_language": "Tilni tanlang",
-
   "auth": {
     "welcome_back": "Xush kelibsiz",
     "create_account": "Akkaunt yaratish",
@@ -28,12 +27,10 @@
     "unknown_error": "Aniqlanmagan xatolik",
     "logout": "Chiqish"
   },
-
   "home": {
     "welcome": "Xush kelibsiz {name}! 🤗",
     "title": "Bosh sahifa"
   },
-
   "navigation": {
     "home": "Bosh sahifa",
     "mentors": "Mentorlar",
@@ -41,7 +38,6 @@
     "progress": "Yutuqlar",
     "profile": "Profil"
   },
-
   "profile": {
     "title": "Profil",
     "user_information": "Foydalanuvchi ma'lumotlari",
@@ -51,14 +47,12 @@
     "na": "Mavjud emas",
     "no_email": "Email yo'q"
   },
-
   "mentors": {
     "title": "Mentorlar",
     "videos_count": "{count} ta video",
     "videos": "Videolar",
     "video_player": "Video pleyer"
   },
-
   "learn": {
     "title": "Darslar",
     "reading": "O'qish",
@@ -67,7 +61,6 @@
     "translator": "Tarjimon",
     "lesson_description": "Dars haqida qisqacha ma'lumot."
   },
-
   "progress": {
     "title": "Yutuqlar",
     "watched_hours": "Ko'rilgan dars soati",
@@ -86,13 +79,11 @@
     "saturday": "Shan",
     "sunday": "Yak"
   },
-
   "drawer": {
     "menu": "Menyu",
     "home": "Bosh sahifa",
     "settings": "Sozlamalar"
   },
-
   "common": {
     "error": "Xatolik: {message}",
     "press_again_to_exit": "Chiqish uchun yana bir marta bosing",
@@ -101,16 +92,15 @@
     "view_all": "Barchasi",
     "start": "Boshlash"
   },
-
   "skills": {
     "translate": "Tarjima",
     "listening": "Tinglash",
     "reading": "O'qish",
     "speaking": "Gapirish"
   },
-
   "courses": {
     "quick_english_a2": "Tezkor ingliz tili A2",
     "achieve_high_levels": "Ingliz tilida yuqori marralarni egallang!"
-  }
+  },
+  "lessons": "Lessons"
 }

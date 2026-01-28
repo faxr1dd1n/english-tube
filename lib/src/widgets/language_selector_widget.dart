@@ -1,4 +1,4 @@
-import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/providers/locale_provider.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class LanguageSelectorWidget extends StatelessWidget {
 
               // Title
               Text(
-                'select_language'.tr(),
+                translate('select_language'),
                 style: const TextStyle(
                   color: AppColor.white,
                   fontSize: 18,
@@ -116,7 +116,7 @@ class LanguageSelectorWidget extends StatelessWidget {
                 Icon(Icons.translate_outlined, color: AppColor.white),
                 const SizedBox(width: 6),
                 Text(
-                  'language'.tr(),
+                  translate('language'),
                   style: TextStyle(
                     color: AppColor.white.withValues(alpha: 0.7),
                     fontSize: 14,
@@ -160,16 +160,13 @@ class _LanguageOption extends StatelessWidget {
         // Avval bottom sheet ni yopamiz
         Navigator.pop(context);
 
-        // Provider orqali tilni o'zgartiramiz (smooth)
+        // Provider orqali tilni o'zgartiramiz (flutter_translate bilan)
         final localeProvider = Provider.of<LocaleProvider>(
           context,
           listen: false,
         );
-        await localeProvider.setLocale(Locale(languageCode));
-
-        // EasyLocalization ni ham yangilaymiz (translations uchun)
         if (context.mounted) {
-          await context.setLocale(Locale(languageCode));
+          await localeProvider.setLocale(context, Locale(languageCode));
         }
       },
       child: Container(

@@ -1,7 +1,7 @@
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ProgressUsersRanking extends StatefulWidget {
   const ProgressUsersRanking({super.key});
@@ -17,7 +17,7 @@ class _ProgressUsersRankingState extends State<ProgressUsersRanking> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: translate('progress.title')),
+        child: AppBarWidget(title: tr('progress.title')),
       ),
       body: ListView.builder(
         // physics: NeverScrollableScrollPhysics(),

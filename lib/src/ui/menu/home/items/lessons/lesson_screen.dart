@@ -1,7 +1,7 @@
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/widgets/app_bar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LessonScreen extends StatefulWidget {
   const LessonScreen({super.key});
@@ -17,7 +17,7 @@ class _LessonScreenState extends State<LessonScreen> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: translate('courses.quick_english_a2')),
+        child: AppBarWidget(title: tr('courses.quick_english_a2')),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -48,7 +48,7 @@ class _LessonScreenState extends State<LessonScreen> {
 
             // Course Title
             Text(
-              translate('courses.quick_english_a2'),
+              tr('courses.quick_english_a2'),
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -60,7 +60,7 @@ class _LessonScreenState extends State<LessonScreen> {
 
             // Course Description
             Text(
-              translate('courses.achieve_high_levels'),
+              tr('courses.achieve_high_levels'),
               style: TextStyle(
                 fontSize: 14,
                 color: AppColor.white.withValues(alpha: 0.7),
@@ -136,7 +136,7 @@ class _LessonScreenState extends State<LessonScreen> {
                     Icon(Icons.play_arrow, color: AppColor.white),
                     SizedBox(width: 8),
                     Text(
-                      translate('common.start'),
+                      tr('common.start'),
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,

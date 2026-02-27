@@ -1,7 +1,7 @@
 import 'package:en_tube/src/ui/menu/progress/pages/progress_users_ranking.dart';
 import 'package:en_tube/src/widgets/title_widget.dart';
 import 'package:en_tube/theme/app_colors.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/ui/menu/progress/line_chart_sample.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_barchart_widget.dart';
 import 'package:en_tube/src/ui/menu/progress/items/stat_type_widget.dart';
@@ -23,7 +23,7 @@ class _ProgressScreenState extends State<ProgressScreen> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: translate('progress.title')),
+        child: AppBarWidget(title: tr('progress.title')),
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -135,15 +135,15 @@ class _ProgressScreenState extends State<ProgressScreen> {
                 children: [
                   Expanded(
                     child: StatWidget(
-                      title: translate('progress.watched_hours'),
-                      content: translate('progress.hours_value'),
+                      title: tr('progress.watched_hours'),
+                      content: tr('progress.hours_value'),
                     ),
                   ),
                   SizedBox(width: 10),
                   Expanded(
                     child: StatWidget(
-                      title: translate('progress.watched_lessons'),
-                      content: translate('progress.lessons_value'),
+                      title: tr('progress.watched_lessons'),
+                      content: tr('progress.lessons_value'),
                     ),
                   ),
                 ],

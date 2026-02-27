@@ -1,4 +1,4 @@
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/bloc/mentor/mentor_bloc.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/mentor_model.dart';
@@ -19,7 +19,7 @@ class VideosScreen extends StatelessWidget {
       backgroundColor: AppColor.generalColor,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: translate('mentors.videos')),
+        child: AppBarWidget(title: tr('mentors.videos')),
       ),
       body: BlocBuilder<MentorBloc, MentorState>(
         builder: (context, state) {

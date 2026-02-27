@@ -1,4 +1,4 @@
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/providers/locale_provider.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +40,7 @@ class LanguageSelectorWidget extends StatelessWidget {
 
               // Title
               Text(
-                translate('select_language'),
+                tr('select_language'),
                 style: const TextStyle(
                   color: AppColor.white,
                   fontSize: 18,
@@ -116,7 +116,7 @@ class LanguageSelectorWidget extends StatelessWidget {
                 Icon(Icons.translate_outlined, color: AppColor.white),
                 const SizedBox(width: 6),
                 Text(
-                  translate('language'),
+                  tr('language'),
                   style: TextStyle(
                     color: AppColor.white.withValues(alpha: 0.7),
                     fontSize: 14,

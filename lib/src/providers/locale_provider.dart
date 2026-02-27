@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocaleProvider extends ChangeNotifier {
@@ -19,7 +19,7 @@ class LocaleProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Tilni o'zgartirish (flutter_translate bilan)
+  // Tilni o'zgartirish
   Future<void> setLocale(BuildContext context, Locale newLocale) async {
     if (_locale == newLocale) return;
 
@@ -31,9 +31,8 @@ class LocaleProvider extends ChangeNotifier {
 
     notifyListeners();
 
-    // flutter_translate ga yangi tilni bildirish (async gap dan keyin context.mounted check)
     if (context.mounted) {
-      await changeLocale(context, newLocale.languageCode);
+      await context.setLocale(newLocale);
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:en_tube/src/ui/menu/home/items/lessons/lessons_list_screen.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/bloc/home/home_bloc.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/story_model.dart';
@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: AppBarWidget(
-            title: translate('home.welcome', args: {'name': userName}),
+            title: tr('home.welcome', namedArgs: {'name': userName}),
             textStyle: TextStyle(
               color: AppColor.white,
               fontSize: 16,
@@ -133,9 +133,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 170,
                       child: Center(
                         child: Text(
-                          translate(
+                          tr(
                             'common.error',
-                            args: {'message': state.errorMessage},
+                            namedArgs: {'message': state.errorMessage},
                           ),
                           style: const TextStyle(color: Colors.white),
                         ),
@@ -227,9 +227,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 120,
                             child: Center(
                               child: Text(
-                                translate(
+                                tr(
                                   'common.error',
-                                  args: {'message': state.errorMessage},
+                                  namedArgs: {'message': state.errorMessage},
                                 ),
                                 style: const TextStyle(color: Colors.white),
                               ),
@@ -247,8 +247,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: TitleWidget(
-                        titleText: translate('common.new_courses'),
-                        buttonText: translate('common.view_all'),
+                        titleText: tr('common.new_courses'),
+                        buttonText: tr('common.view_all'),
                         onTap: () {
                           Navigator.of(context, rootNavigator: true).push(
                             MaterialPageRoute(
@@ -266,8 +266,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       child: TitleWidget(
-                        titleText: translate('common.new_courses'),
-                        buttonText: translate('common.view_all'),
+                        titleText: tr('common.new_courses'),
+                        buttonText: tr('common.view_all'),
                         onTap: () {
                           Navigator.of(context, rootNavigator: true).push(
                             MaterialPageRoute(

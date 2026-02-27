@@ -1,4 +1,4 @@
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/service/firebase_auth_service.dart';
 import 'package:en_tube/src/ui/login/signup_screen.dart';
@@ -43,16 +43,16 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() => isLoading = false);
 
       if (mounted) {
-        String errorMessage = translate('auth.unknown_error');
+        String errorMessage = tr('auth.unknown_error');
 
         if (e.code == 'user-not-found') {
-          errorMessage = translate('auth.user_not_found');
+          errorMessage = tr('auth.user_not_found');
         } else if (e.code == 'wrong-password') {
-          errorMessage = translate('auth.wrong_password');
+          errorMessage = tr('auth.wrong_password');
         } else if (e.code == 'invalid-email') {
-          errorMessage = translate('auth.invalid_email');
+          errorMessage = tr('auth.invalid_email');
         } else if (e.code == 'user-disabled') {
-          errorMessage = translate('auth.account_deleted');
+          errorMessage = tr('auth.account_deleted');
         } else if (e.message != null) {
           errorMessage = e.message!;
         }
@@ -81,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                translate('auth.welcome_back'),
+                tr('auth.welcome_back'),
                 style: const TextStyle(
                   color: AppColor.white,
                   fontSize: 28,
@@ -98,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 decoration: InputDecoration(
                   filled: false,
-                  labelText: translate('auth.email'),
+                  labelText: tr('auth.email'),
                   labelStyle: const TextStyle(color: AppColor.white),
                   focusedBorder: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 validator: (v) {
-                  if (v!.isEmpty) return translate('auth.enter_email');
+                  if (v!.isEmpty) return tr('auth.enter_email');
                   return null;
                 },
               ),
@@ -137,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: AppColor.white,
                     ),
                   ),
-                  labelText: translate('auth.password'),
+                  labelText: tr('auth.password'),
                   labelStyle: const TextStyle(color: AppColor.white),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 validator: (v) {
-                  if (v!.isEmpty) return translate('auth.enter_password');
+                  if (v!.isEmpty) return tr('auth.enter_password');
                   return null;
                 },
               ),
@@ -182,7 +182,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     AlwaysStoppedAnimation<Color>(AppColor.generalColor),
                             )
                             : Text(
-                                translate('auth.login'),
+                                tr('auth.login'),
                                 style: const TextStyle(
                                   color: AppColor.generalColor,
                                   fontSize: 18,
@@ -201,7 +201,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '${translate('auth.dont_have_account')} ',
+                    '${tr('auth.dont_have_account')} ',
                     style: const TextStyle(
                       color: AppColor.white,
                       fontSize: 14,
@@ -215,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       );
                     },
                     child: Text(
-                      translate('auth.sign_up'),
+                      tr('auth.sign_up'),
                       style: const TextStyle(
                         color: AppColor.white,
                         fontSize: 14,

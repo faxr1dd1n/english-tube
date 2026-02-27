@@ -1,4 +1,4 @@
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/bloc/mentor/mentor_bloc.dart';
 import 'package:en_tube/src/ui/menu/mentors/items/mentor_widget.dart';
 import 'package:en_tube/src/ui/menu/mentors/videos/videos_screen.dart';
@@ -18,7 +18,7 @@ class MentorsScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.primary,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarWidget(title: translate('mentors.title')),
+        child: AppBarWidget(title: tr('mentors.title')),
       ),
       body: BlocBuilder<MentorBloc, MentorState>(
         builder: (context, state) {
@@ -79,9 +79,9 @@ class MentorsScreen extends StatelessWidget {
           if (state.mentorsStatus == FormzSubmissionStatus.failure) {
             return Center(
               child: Text(
-                translate(
+                tr(
                   'common.error',
-                  args: {'message': state.errorMessage},
+                  namedArgs: {'message': state.errorMessage},
                 ),
                 style: const TextStyle(color: Colors.white),
               ),

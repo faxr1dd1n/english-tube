@@ -1,4 +1,4 @@
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/model/home_widget_model.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +11,13 @@ class HomeWidgetsGridVieew extends StatelessWidget {
   String _getTranslatedTitle(String imageUrl) {
     switch (imageUrl.toLowerCase()) {
       case 'translate':
-        return translate('skills.translate');
+        return tr('skills.translate');
       case 'listening':
-        return translate('skills.listening');
+        return tr('skills.listening');
       case 'reading':
-        return translate('skills.reading');
+        return tr('skills.reading');
       case 'speaking':
-        return translate('skills.speaking');
+        return tr('skills.speaking');
       default:
         return imageUrl;
     }

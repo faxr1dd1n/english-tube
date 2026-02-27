@@ -1,7 +1,7 @@
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/ui/menu/home/items/lessons/lesson_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LessonWidget extends StatelessWidget {
   const LessonWidget({super.key});
@@ -22,7 +22,7 @@ class LessonWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            translate('courses.quick_english_a2'),
+            tr('courses.quick_english_a2'),
             style: const TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
@@ -31,7 +31,7 @@ class LessonWidget extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           Text(
-            translate('courses.achieve_high_levels'),
+            tr('courses.achieve_high_levels'),
             textAlign: TextAlign.center,
             maxLines: 2,
             style: const TextStyle(
@@ -51,7 +51,7 @@ class LessonWidget extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             ),
             child: Text(
-              translate('common.start'),
+              tr('common.start'),
               style: TextStyle(fontSize: 13),
             ),
           ),

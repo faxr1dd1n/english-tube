@@ -1,4 +1,4 @@
-import 'package:flutter_translate/flutter_translate.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:en_tube/src/constraints/app_color.dart';
 import 'package:en_tube/src/constraints/app_images.dart';
 import 'package:en_tube/theme/app_colors.dart';
@@ -34,7 +34,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               padding: const EdgeInsets.all(16),
               alignment: Alignment.bottomLeft,
               child: Text(
-                translate('drawer.menu'),
+                tr('drawer.menu'),
                 style: const TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
@@ -42,7 +42,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ListTile(
             leading: const Icon(Icons.home, color: AppColor.white),
             title: Text(
-              translate('drawer.home'),
+              tr('drawer.home'),
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
             onTap: () {
@@ -52,7 +52,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           ListTile(
             leading: const Icon(Icons.settings, color: AppColor.white),
             title: Text(
-              translate('drawer.settings'),
+              tr('drawer.settings'),
               style: const TextStyle(color: Colors.white, fontSize: 18),
             ),
             onTap: () {},
